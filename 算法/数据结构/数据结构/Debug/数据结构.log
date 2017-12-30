@@ -1,0 +1,39 @@
+﻿生成启动时间为 2017/12/30 11:24:25。
+     1>项目“D:\GitHub\OOPC\算法\数据结构\数据结构\数据结构.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\数据结构.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         D:\Visual Studio 2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt main.c "哈希查找.c"
+         哈希查找.c
+     1>d:\github\oopc\算法\数据结构\数据结构\哈希查找.c(66): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\visual studio 2010\vc\include\stdio.h(304) : 参见“scanf”的声明
+     1>d:\github\oopc\算法\数据结构\数据结构\哈希查找.c(70): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\visual studio 2010\vc\include\stdio.h(304) : 参见“scanf”的声明
+     1>d:\github\oopc\算法\数据结构\数据结构\哈希查找.c(80): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\visual studio 2010\vc\include\stdio.h(304) : 参见“scanf”的声明
+         main.c
+     1>d:\github\oopc\算法\数据结构\数据结构\main.c(5): warning C4013: “haxicz”未定义；假设外部返回 int
+         正在生成代码...
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\GitHub\OOPC\算法\数据结构\Debug\数据结构.exe" /INCREMENTAL /NOLOGO d3dx9.lib dxerr.lib dxguid.lib d3dx10d.lib d3d9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\数据结构.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\GitHub\OOPC\算法\数据结构\Debug\数据结构.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\GitHub\OOPC\算法\数据结构\Debug\数据结构.lib" /MACHINE:X86 "Debug\数据结构.exe.embed.manifest.res"
+         Debug\main.obj
+         "Debug\分块查找.obj"
+         "Debug\哈希查找.obj"
+         "Debug\拆半查找.obj"
+         "Debug\顺序查找.obj"
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\数据结构.exe.embed.manifest" /manifest "Debug\数据结构.exe.intermediate.manifest"
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         数据结构.vcxproj -> D:\GitHub\OOPC\算法\数据结构\Debug\数据结构.exe
+       FinalizeBuildStatus:
+         正在删除文件“Debug\数据结构.unsuccessfulbuild”。
+         正在对“Debug\数据结构.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\GitHub\OOPC\算法\数据结构\数据结构\数据结构.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.96

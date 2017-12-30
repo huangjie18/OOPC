@@ -1,0 +1,26 @@
+﻿生成启动时间为 2017/12/30 9:47:40。
+     1>项目“D:\GitHub\OOPC\OOPC\light\light\light.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\light.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         D:\Visual Studio 2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt light.c
+         light.c
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\Visual Studio 2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\GitHub\OOPC\OOPC\light\Debug\light.exe" /INCREMENTAL /NOLOGO d3dx9.lib dxerr.lib dxguid.lib d3dx10d.lib d3d9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\light.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\GitHub\OOPC\OOPC\light\Debug\light.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\GitHub\OOPC\OOPC\light\Debug\light.lib" /MACHINE:X86 Debug\light.exe.embed.manifest.res
+         Debug\light.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\light.exe.embed.manifest" /manifest Debug\light.exe.intermediate.manifest
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         light.vcxproj -> D:\GitHub\OOPC\OOPC\light\Debug\light.exe
+       FinalizeBuildStatus:
+         正在删除文件“Debug\light.unsuccessfulbuild”。
+         正在对“Debug\light.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\GitHub\OOPC\OOPC\light\light\light.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.73
