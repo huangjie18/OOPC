@@ -1,0 +1,22 @@
+/* cx14-ap1.c */
+#include "stdio.h"
+#include "lw_oopc.h"
+#include "cx14-ia.h"
+
+void print_area(IA* pi)
+  {
+      printf("area=%6.2f\n", pi->cal_area(pi));
+  }
+
+int main()
+{   IA *pc, *ps;
+    pc = (IA*)CircleNew();
+    pc->init(pc, 10.0);
+    print_area(pc);
+
+    ps = (IA*)SquareNew();
+    ps->init(ps, 10.0);
+    print_area(ps);
+    getchar();
+    return 0;
+}

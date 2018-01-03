@@ -1,0 +1,158 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/23/2008  18:23:11  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE BLINKY.obj TO BLINKY RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  BLINKY.obj (BLINKY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ICALL)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTXDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTPDATA)
+
+
+LINK MAP OF MODULE:  BLINKY (BLINKY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         _DATA_GROUP_
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0070H     UNIT         ?C?LIB_CODE
+            CODE    0870H     0043H     UNIT         ?PR?RUN?BLINKY
+            CODE    08B3H     0022H     UNIT         ?PR?_LEDSETTING?BLINKY
+            CODE    08D5H     0012H     UNIT         ?PR?MAIN?BLINKY
+            CODE    08E7H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08F3H     0001H     UNIT         ?PR?WAIT?BLINKY
+
+
+
+OVERLAY MAP OF MODULE:   BLINKY (BLINKY)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?BLINKY
+
+?PR?MAIN?BLINKY                0008H    0003H
+  +--> ?PR?_LEDSETTING?BLINKY
+
+?PR?_LEDSETTING?BLINKY         000BH    0003H
+  +--> ?PR?RUN?BLINKY
+
+?PR?RUN?BLINKY                 -----    -----
+  +--> ?PR?WAIT?BLINKY
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/23/2008  18:23:11  PAGE 2
+
+
+
+
+SYMBOL TABLE OF MODULE:  BLINKY (BLINKY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BLINKY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:08B3H         PUBLIC        _LEDSetting
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:08D5H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:08F3H         PUBLIC        wait
+  C:0870H         SYMBOL        run
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          WAIT
+  C:08F3H         LINE#         6
+  C:08F3H         LINE#         8
+  -------         ENDPROC       WAIT
+  -------         PROC          RUN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:0870H         LINE#         15
+  C:0870H         LINE#         17
+  C:0878H         LINE#         18
+  C:087AH         LINE#         19
+  C:087DH         LINE#         20
+  C:0880H         LINE#         21
+  C:088BH         LINE#         22
+  C:0891H         LINE#         23
+  C:0899H         LINE#         24
+  C:089BH         LINE#         25
+  C:089EH         LINE#         26
+  C:08A1H         LINE#         27
+  C:08ACH         LINE#         28
+  C:08B2H         LINE#         29
+  -------         ENDPROC       RUN
+  -------         PROC          _LEDSETTING
+  D:000BH         SYMBOL        t
+  C:08B3H         LINE#         31
+  C:08B9H         LINE#         32
+  C:08CEH         LINE#         33
+  -------         ENDPROC       _LEDSETTING
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        le
+  -------         ENDDO         
+  C:08D5H         LINE#         35
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/23/2008  18:23:11  PAGE 3
+
+
+  C:08D5H         LINE#         37
+  C:08DEH         LINE#         38
+  C:08DEH         LINE#         39
+  C:08E5H         LINE#         40
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BLINKY
+
+  -------         MODULE        ?C?PSTPTR
+  C:0800H         PUBLIC        ?C?PSTPTR
+  -------         ENDMOD        ?C?PSTPTR
+
+  -------         MODULE        ?C?ICALL
+  C:084FH         PUBLIC        ?C?ICALL
+  C:0853H         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        ?C?PSTIDATA
+  C:0855H         PUBLIC        ?C?PSTIDATA
+  -------         ENDMOD        ?C?PSTIDATA
+
+  -------         MODULE        ?C?PSTXDATA
+  C:085EH         PUBLIC        ?C?PSTXDATA
+  -------         ENDMOD        ?C?PSTXDATA
+
+  -------         MODULE        ?C?PSTPDATA
+  C:0867H         PUBLIC        ?C?PSTPDATA
+  -------         ENDMOD        ?C?PSTPDATA
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0078H BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=15.0 xdata=0 code=247
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

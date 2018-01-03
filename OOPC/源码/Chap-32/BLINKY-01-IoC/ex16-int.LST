@@ -1,0 +1,39 @@
+C51 COMPILER V8.01   EX16_INT                                                              05/19/2008 09:34:36 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX16_INT
+OBJECT MODULE PLACED IN ex16-int.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ex16-int.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX16-int.c */
+   2          #include <REG52.H>
+   3          #include <stdio.h>
+   4          #include "lw_oopc_kc.h" 
+   5          #include "ex16-int.h"
+   6          
+   7          static void init(Integer *t)
+   8              {  t->value = 100;  }
+   9          
+  10          static void display(Integer *t)
+  11             {  P0 = (char)t->value;  }
+  12          
+  13          CTOR(Integer)
+  14   1          FUNCTION_SETTING(init, init);
+  15   1              FUNCTION_SETTING(display, display);
+  16   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     94    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

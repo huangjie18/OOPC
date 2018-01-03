@@ -1,0 +1,79 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 18:25:46 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-03.C (BLINKY.C)  */
+   2          #include <REG51F.H>
+   3          #define LW_OOPC_STATIC
+   4          #include "lw_oopc_kc.h"
+   5          
+   6          void wait (void)  {              
+   7   1             ;                              
+   8   1           }
+   9          
+  10          CLASS(LED)
+  11          {
+  12             void (*run)();
+  13          };
+  14          
+  15          static void run(){
+  16   1           unsigned int i;  unsigned char j;      
+  17   1              for (j=0x01; j< 0x80; j<<=1)  {   
+  18   2             P1 = j;                         
+  19   2             for (i = 0; i < 10000; i++)  {  
+  20   3                  wait ();                      
+  21   3              }
+  22   2          }
+  23   1          for (j=0x80; j> 0x01; j>>=1)  {  
+  24   2             P1 = j;                         
+  25   2             for (i = 0; i < 10000; i++)  { 
+  26   3                wait ();                      
+  27   3            }    
+  28   2      }
+  29   1      }
+  30          
+  31          CTOR(LED)
+  32   1         FUNCTION_SETTING(run, run)
+  33   1      END_CTOR
+  34          /* -------------------------------------- */
+  35          char NUMB[10] = {0xC0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x83, 0xf8, 0x80, 0x98}; 
+  36          static void show(){
+  37   1           unsigned int x, i;              
+  38   1       for (x=0; x < 10; x++)  {   
+  39   2              P0 = NUMB[x];                         
+  40   2              for (i = 0; i < 10000; i++)  {  
+  41   3                  wait ();                      
+  42   3              }
+  43   2          }
+  44   1       }
+  45          /* --------------------------------------- */
+  46          void main (void)  {
+  47   1          LED le; 
+  48   1          LEDSetting(&le);     
+  49   1                                    
+  50   1          while (1) {                       
+  51   2             le.run();
+  52   2                 show();
+  53   2              }
+  54   1      }
+
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 18:25:46 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    162    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

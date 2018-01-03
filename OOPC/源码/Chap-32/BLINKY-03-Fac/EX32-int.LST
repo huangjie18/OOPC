@@ -1,0 +1,44 @@
+C51 COMPILER V8.01   EX32_INT                                                              05/19/2008 11:21:35 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_INT
+OBJECT MODULE PLACED IN EX32-int.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-int.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-int.c */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h" 
+   4          #include "ex32-idisp.h"
+   5          #include "ex32-int.h"
+   6           
+   7          static void init(Integer *t)
+   8              {  
+   9   1                t->value = 15;
+  10   1          }
+  11          
+  12          static void display(Integer *t)
+  13          {
+  14   1          P0 = (char)t->value;
+  15   1                                
+  16   1      }
+  17          
+  18          CTOR(Integer)
+  19   1          FUNCTION_SETTING(IDisplay.init, init);
+  20   1          FUNCTION_SETTING(IDisplay.display, display);
+  21   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     94    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

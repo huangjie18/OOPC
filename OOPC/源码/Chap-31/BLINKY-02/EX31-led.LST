@@ -1,0 +1,55 @@
+C51 COMPILER V8.01   EX31_LED                                                              05/19/2008 04:13:45 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX31_LED
+OBJECT MODULE PLACED IN EX31-led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX31-led.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  EX31-led.c   */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex31-led.h"
+   5          
+   6          void g_delay(unsigned long ms) {
+   7   1         long i, j;
+   8   1         for(i=0; i<ms; i++)
+   9   1            for(j=0; j<120; j++);
+  10   1      }
+  11          
+  12          static unsigned char SEGTAB[] = {0xC0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x83, 0xf8, 0x80, 0x98}; 
+  13          static unsigned char SCANLINE[] = {0xf7, 0xfb, 0xfd, 0xfe}; 
+  14          
+  15          static void show_digits(LED *t) {
+  16   1          unsigned char ch, sc;
+  17   1              int i;
+  18   1              P0 = 0xf0;
+  19   1          for(i=0; i<4; i++)
+  20   1                 {
+  21   2                  ch = SEGTAB[t->digits[i]];
+  22   2                      sc = SCANLINE[i];
+  23   2                      t->scan_port(0xff);
+  24   2                      t->data_port(ch);
+  25   2                      t->scan_port(sc);
+  26   2                      g_delay(20000);
+  27   2                 }
+  28   1      }
+  29          
+  30          CTOR(LED)
+  31   1              FUNCTION_SETTING(show_digits, show_digits)
+  32   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    320    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14      22
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

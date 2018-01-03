@@ -1,0 +1,86 @@
+C51 COMPILER V8.01   EX30_LIGHT_L                                                          05/19/2008 02:42:50 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX30_LIGHT_L
+OBJECT MODULE PLACED IN EX30-light-l.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX30-light-l.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX30-light-l.c  */
+   2          #include <REG51F.H>
+   3          #include <stdio.h>
+   4          
+   5          #define LW_OOPC_STATIC
+   6          #include "EX30-light-l.h"
+   7          
+   8          sbit RED_pin = P1^0;
+   9          sbit YELLOW_pin = P1^1;
+  10          sbit GREEN_pin = P1^2;
+  11            
+  12          /* ---------------------------------------------- */                            
+  13          static void init(char st, LightL* t) {
+  14   1          P1 = 0x00;
+  15   1          t->state = st; 
+  16   1          if(st == 'G') t->goto_G();
+  17   1              else if(st == 'R') t->goto_R();
+  18   1                   else t->goto_Y();
+  19   1         }
+  20          
+  21          static void ev_Y(LightL* t) {
+  22   1            if( t->state == 'G') {
+  23   2                     t->state = 'Y';
+  24   2                         t->goto_Y();
+  25   2                 }
+  26   1      }
+  27          static void ev_RG(LightL* t) {
+  28   1            if( t->state == 'Y') {
+  29   2                         t->state = 'R';
+  30   2                     t->goto_R();
+  31   2                 }
+  32   1                else if(t->state == 'R') {
+  33   2                     t->state = 'G';
+  34   2                         t->goto_G();
+  35   2                         }
+  36   1      }
+  37          static void goto_R() {
+  38   1            RED_pin = 1;
+  39   1                YELLOW_pin = 0;
+  40   1                GREEN_pin = 0;
+  41   1          }
+  42                   
+  43          static void goto_Y() {
+  44   1            RED_pin = 0;
+  45   1                YELLOW_pin = 1;
+  46   1                GREEN_pin = 0;
+  47   1          } 
+  48          static void goto_G() {
+  49   1            RED_pin = 0;
+  50   1                YELLOW_pin = 0;
+  51   1                GREEN_pin = 1;
+  52   1          }   
+  53                  
+  54          CTOR(LightL)
+  55   1        FUNCTION_SETTING(init, init)
+C51 COMPILER V8.01   EX30_LIGHT_L                                                          05/19/2008 02:42:50 PAGE 2   
+
+  56   1        FUNCTION_SETTING(ev_Y, ev_Y)
+  57   1        FUNCTION_SETTING(ev_RG, ev_RG)
+  58   1        FUNCTION_SETTING(goto_R, goto_R)
+  59   1        FUNCTION_SETTING(goto_Y, goto_Y)
+  60   1        FUNCTION_SETTING(goto_G, goto_G)
+  61   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    318    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

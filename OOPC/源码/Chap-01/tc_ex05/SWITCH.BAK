@@ -1,0 +1,15 @@
+/* DoorSwitch.c   */
+#include "stdio.h"
+#include "DoorSwitch.h"
+
+static void swDown() 
+   {  printf("SW is Down\n");  }
+static void swUp()
+   {  printf("SW is Up\n");  }
+
+CTOR(Switch)
+   FUNCTION_SETTING(swDown, swDown)
+   FUNCTION_SETTING(swUp, swUp)
+END_CTOR
+
+

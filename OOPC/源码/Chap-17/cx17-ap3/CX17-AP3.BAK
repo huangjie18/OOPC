@@ -1,0 +1,50 @@
+/*   cx17-ap3.c   */
+#include "stdio.h"
+#include "malloc.h"
+
+struct Rectangle
+{
+	double length;
+    double width;
+};
+
+double cal_area(struct Rectangle* rec)
+{
+	return rec->length * rec->width;
+}
+
+double cal_side(struct Rectangle* rec)
+{
+   return (rec->length + rec->width) * 2;
+}
+
+struct Rectangle* RectangleNew()
+{
+   struct Rectangle* pr;
+   pr = (struct Rectangle*)malloc(sizeof(struct Rectangle));
+   return pr;
+}
+void init(struct Rectangle* cthis, double len, double wid)
+{
+   cthis->length = len;
+   cthis->width = wid;
+}
+/*------------------------------------------*/
+int main()
+{
+   double v;
+   struct Rectangle* pr;
+   pr = RectangleNew();
+   init(pr, 10.5, 20.5);
+
+   v = cal_area(pr);
+   printf("area=%7.3f\n", v);
+
+   v = cal_side(pr);
+   printf("area=%7.3f\n", v);
+
+   getchar();
+   return 0;
+}
+
+

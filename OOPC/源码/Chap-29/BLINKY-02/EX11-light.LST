@@ -1,0 +1,12 @@
+C51 COMPILER V8.01   EX11_LIGHT                                                            05/19/2008 01:52:25 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX11_LIGHT
+OBJECT MODULE PLACED IN EX11-light.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX11-light.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+*** ERROR C318 OF EX11-light.c: can't open file 'EX11-light.c'
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

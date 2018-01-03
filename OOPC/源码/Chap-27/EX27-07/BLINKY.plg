@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_old\EX01-07\BLINKY.uv2
+Project File Date:  05/17/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+compiling BLINKY.C...
+BLINKY.C(4): warning C318: can't open file 'lw_oopc_kc.h'
+BLINKY.C(12): warning C280: 'run': unreferenced local variable
+BLINKY.C(13): error C141: syntax error near ';'
+BLINKY.C(34): error C202: 'LED': undefined identifier
+BLINKY.C(34): error C141: syntax error near 'le'
+BLINKY.C(35): error C202: 'le': undefined identifier
+BLINKY.C(37): error C202: 'le': undefined identifier
+Target not created
+Build target 'Simulator'
+compiling BLINKY.C...
+linking...
+Program Size: data=12.0 xdata=0 code=107
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_old\EX01-04\BLINKY.uv2
+Project File Date:  05/17/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+compiling BLINKY.C...
+BLINKY.C(4): warning C318: can't open file 'lw_oopc_kc.h'
+BLINKY.C(12): warning C280: 'run': unreferenced local variable
+BLINKY.C(13): error C141: syntax error near ';'
+BLINKY.C(32): error C131: 'run': duplicate function-parameter
+BLINKY.C(33): error C132: '_FUNCTION_SETTING': not in formal parameter list
+BLINKY.C(33): error C141: syntax error near 'END_CTOR'
+BLINKY.C(35): error C132: 'END_CTOR': not in formal parameter list
+BLINKY.C(35): error C244: 'NUMB': can't initialize, bad type or class
+BLINKY.C(35): error C132: 'NUMB': not in formal parameter list
+BLINKY.C(38): error C132: '_CLASS': not in formal parameter list
+BLINKY.C(38): error C141: syntax error near '{'
+BLINKY.C(39): error C132: 'show': not in formal parameter list
+BLINKY.C(40): error C141: syntax error near '}'
+BLINKY.C(45): error C202: 'NUMB': undefined identifier
+BLINKY.C(53): error C131: 'show': duplicate function-parameter
+BLINKY.C(54): error C132: '_FUNCTION_SETTING': not in formal parameter list
+BLINKY.C(54): error C141: syntax error near 'END_CTOR'
+BLINKY.C(56): error C132: 'END_CTOR': not in formal parameter list
+BLINKY.C(56): error C132: 'main': not in formal parameter list
+BLINKY.C(56): error C141: syntax error near '{'
+BLINKY.C(57): error C132: 'LED': not in formal parameter list
+BLINKY.C(57): error C132: 'le': not in formal parameter list
+BLINKY.C(57): error C141: syntax error near 'sg'
+BLINKY.C(57): error C132: 'sg': not in formal parameter list
+BLINKY.C(58): error C141: syntax error near '&'
+BLINKY.C(58): error C132: 'LEDSetting': not in formal parameter list
+BLINKY.C(58): error C141: syntax error near '&'
+BLINKY.C(58): error C132: 'SEGSetting': not in formal parameter list
+BLINKY.C(59): error C141: syntax error near 'while'
+BLINKY.C(59): error C141: syntax error near '1'
+BLINKY.C(60): error C129: missing ';' before '.'
+Target not created
+Build target 'Simulator'
+compiling BLINKY.C...
+linking...
+Program Size: data=28.0 xdata=0 code=477
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

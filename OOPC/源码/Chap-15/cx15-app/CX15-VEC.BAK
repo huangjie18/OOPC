@@ -1,0 +1,55 @@
+/* cx15-vec.c  */
+#include "cx15-vec.h"
+static void initialize(void* t, int n)
+{
+  Vector* cthis = (Vector*) t;
+  cthis->index = 0;
+  cthis->pv = (void**)malloc(n * sizeof(void*));
+}
+
+static void Add(void* t, void* obj)
+{
+  Vector* cthis = (Vector*) t;
+  cthis->pv[cthis->index] = obj;
+}
+
+static int GetSize(void* t)
+{
+   Vector* cthis = (Vector*)t;
+   return cthis->index;
+}
+
+static void* get(void* t, int k)
+{
+   Vector* cthis = (Vector*)t;
+   return cthis->pv[k];
+}
+
+CTOR(Vector)
+   FUNCTION_SETTING(init, initialize);
+   FUNCTION_SETTING(Add, Add)
+   FUNCTION_SETTING(GetSize, GetSize);
+   FUNCTION_SETTING(Get, Get);
+END_CTOR
+
+int main()
+{
+   Vector* vec = (Vector*)VectorNew();
+   int *p;
+   int x = 10;
+   int y = 38;
+   int sz, i;
+   vec->init(vec, 10);
+   vec->Add(vec, &x);
+   vec->Add(vec, &y);
+   sz = vec->getySize(vec);
+   for(i=0; i<sz; i++)
+     {
+      p = vec->get(vec, i);
+      printf("%d   ", *p);
+     }
+   printf("\n");
+}
+
+
+

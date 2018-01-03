@@ -1,0 +1,61 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:39:11 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-ap-3.c (BLINKY.c)  */
+   2          #include "lw_oopc_kc.h" 
+   3          #include "ex32-idisp.h"
+   4          #include "ex32-fac.h"
+   5          
+   6          extern void* FactoryNew();
+   7          Factory *pfac;
+   8          
+   9          CLASS(Document)
+  10             {
+  11                void (*display)();
+  12             };
+  13          
+  14          static void display()
+  15             {  IDisplay *pi;
+  16   1                pi = pfac->get_object(); 
+  17   1                pi->init(pi);
+  18   1                pi->display(pi);
+  19   1          }
+  20          
+  21          CTOR(Document)
+  22   1          FUNCTION_SETTING(display, display);
+  23   1      END_CTOR
+  24          
+  25          /* ----------------------------------- */
+  26          char xdata MemPool[2048];
+  27          
+  28          void main() {
+  29   1      Document *pd;
+  30   1      init_mempool(MemPool,sizeof(MemPool));
+  31   1      pfac = FactoryNew();
+  32   1      pd = DocumentNew();
+  33   1      pd->display();
+  34   1        
+  35   1      while(1) {
+  36   2                 ;
+  37   2              }
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    153    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   2048    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

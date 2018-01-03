@@ -1,0 +1,294 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/19/2008  11:32:59  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE BLINKY.obj, EX29-light.obj TO BLINKY RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  BLINKY.obj (BLINKY)
+  EX29-light.obj (EX29_LIGHT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ILDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ISTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ICALL)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDXDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTXDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDPDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTPDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDCODE)
+
+
+LINK MAP OF MODULE:  BLINKY (BLINKY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0016H     UNIT         _DATA_GROUP_
+            IDATA   001EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0161H     UNIT         ?C?LIB_CODE
+            CODE    0961H     0055H     UNIT         ?PR?_TLIGHTSETTING?EX29_LIGHT
+            CODE    09B6H     004EH     UNIT         ?PR?_RUN?EX29_LIGHT
+            CODE    0A04H     004AH     UNIT         ?PR?_PERFORM?EX29_LIGHT
+            CODE    0A4EH     0029H     UNIT         ?PR?MAIN?BLINKY
+            CODE    0A77H     0026H     UNIT         ?PR?_INIT?EX29_LIGHT
+            CODE    0A9DH     0023H     UNIT         ?PR?_G_DELAY?EX29_LIGHT
+            CODE    0AC0H     0018H     UNIT         ?PR?G_TIMER_DELAY?EX29_LIGHT
+            CODE    0AD8H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   BLINKY (BLINKY)
+
+
+SEGMENT                                 DATA_GROUP 
+  +--> CALLED SEGMENT                 START    LENGTH
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:32:59  PAGE 2
+
+
+-----------------------------------------------------
+?C_C51STARTUP                         -----    -----
+  +--> ?PR?MAIN?BLINKY
+
+?PR?MAIN?BLINKY                       0008H    0010H
+  +--> ?PR?_TLIGHTSETTING?EX29_LIGHT
+
+?PR?_TLIGHTSETTING?EX29_LIGHT         0018H    0003H
+  +--> ?PR?_INIT?EX29_LIGHT
+  +--> ?PR?_RUN?EX29_LIGHT
+  +--> ?PR?_PERFORM?EX29_LIGHT
+
+?PR?_RUN?EX29_LIGHT                   001BH    0003H
+
+?PR?_PERFORM?EX29_LIGHT               001BH    0003H
+  +--> ?PR?_G_DELAY?EX29_LIGHT
+
+?PR?_G_DELAY?EX29_LIGHT               -----    -----
+  +--> ?PR?G_TIMER_DELAY?EX29_LIGHT
+
+
+
+SYMBOL TABLE OF MODULE:  BLINKY (BLINKY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BLINKY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0A4EH         PUBLIC        main
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        light
+  -------         ENDDO         
+  C:0A4EH         LINE#         7
+  C:0A4EH         LINE#         9
+  C:0A57H         LINE#         11
+  C:0A66H         LINE#         12
+  C:0A66H         LINE#         13
+  C:0A75H         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BLINKY
+
+  -------         MODULE        EX29_LIGHT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:0080H.0       PUBLIC        RED_pin
+  B:0080H.1       PUBLIC        YELLOW_pin
+  D:00A8H         PUBLIC        IE
+  C:0961H         PUBLIC        _TLightSetting
+  C:0A77H         SYMBOL        _init
+  D:00B8H         PUBLIC        IP
+  B:0080H.2       PUBLIC        GREEN_pin
+  D:00D8H         PUBLIC        CCON
+  D:0098H         PUBLIC        SCON
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:32:59  PAGE 3
+
+
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:09B6H         SYMBOL        _run
+  C:0A9DH         PUBLIC        _g_delay
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  C:0AC0H         PUBLIC        g_timer_delay
+  C:0A04H         SYMBOL        _perform
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          G_TIMER_DELAY
+  C:0AC0H         LINE#         10
+  C:0AC0H         LINE#         11
+  C:0AC3H         LINE#         12
+  C:0AC6H         LINE#         13
+  C:0AC8H         LINE#         14
+  C:0ACBH         LINE#         15
+  C:0ACEH         LINE#         16
+  C:0AD0H         LINE#         17
+  C:0AD2H         LINE#         18
+  C:0AD5H         LINE#         19
+  C:0AD7H         LINE#         20
+  -------         ENDPROC       G_TIMER_DELAY
+  -------         PROC          _G_DELAY
+  D:0006H         SYMBOL        sec
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0A9DH         LINE#         22
+  C:0A9DH         LINE#         24
+  C:0AA7H         LINE#         25
+  C:0AAAH         LINE#         26
+  C:0ABFH         LINE#         27
+  -------         ENDPROC       _G_DELAY
+  -------         PROC          _INIT
+  D:0001H         SYMBOL        t
+  C:0A77H         LINE#         29
+  C:0A77H         LINE#         30
+  C:0A7AH         LINE#         31
+  C:0A7FH         LINE#         32
+  C:0A89H         LINE#         33
+  C:0A93H         LINE#         34
+  -------         ENDPROC       _INIT
+  -------         PROC          _RUN
+  D:001BH         SYMBOL        t
+  C:09B6H         LINE#         37
+  C:09BCH         LINE#         38
+  C:09CBH         LINE#         39
+  C:09CBH         LINE#         40
+  C:09CDH         LINE#         41
+  C:09CDH         LINE#         42
+  C:09CFH         LINE#         43
+  C:09CFH         LINE#         44
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:32:59  PAGE 4
+
+
+  C:09D7H         LINE#         45
+  C:09D7H         LINE#         46
+  C:09D9H         LINE#         47
+  C:09D9H         LINE#         48
+  C:09E4H         LINE#         49
+  C:0A03H         LINE#         50
+  C:0A03H         LINE#         51
+  C:0A03H         LINE#         52
+  -------         ENDPROC       _RUN
+  -------         PROC          _PERFORM
+  D:001BH         SYMBOL        t
+  C:0A04H         LINE#         53
+  C:0A0AH         LINE#         54
+  C:0A19H         LINE#         55
+  C:0A19H         LINE#         56
+  C:0A1BH         LINE#         57
+  C:0A1DH         LINE#         58
+  C:0A1FH         LINE#         59
+  C:0A22H         LINE#         60
+  C:0A24H         LINE#         61
+  C:0A24H         LINE#         62
+  C:0A26H         LINE#         63
+  C:0A28H         LINE#         64
+  C:0A2AH         LINE#         65
+  C:0A33H         LINE#         66
+  C:0A35H         LINE#         67
+  C:0A35H         LINE#         68
+  C:0A37H         LINE#         69
+  C:0A39H         LINE#         70
+  C:0A3BH         LINE#         71
+  C:0A4DH         LINE#         72
+  C:0A4DH         LINE#         73
+  C:0A4DH         LINE#         74
+  -------         ENDPROC       _PERFORM
+  -------         PROC          _TLIGHTSETTING
+  D:0018H         SYMBOL        t
+  C:0961H         LINE#         76
+  C:0967H         LINE#         77
+  C:097FH         LINE#         78
+  C:0997H         LINE#         79
+  C:09AFH         LINE#         80
+  -------         ENDPROC       _TLIGHTSETTING
+  -------         ENDMOD        EX29_LIGHT
+
+  -------         MODULE        ?C?CLDPTR
+  C:0800H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:0819H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?ILDOPTR
+  C:082BH         PUBLIC        ?C?ILDOPTR
+  -------         ENDMOD        ?C?ILDOPTR
+
+  -------         MODULE        ?C?ISTOPTR
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:32:59  PAGE 5
+
+
+  C:0863H         PUBLIC        ?C?ISTOPTR
+  -------         ENDMOD        ?C?ISTOPTR
+
+  -------         MODULE        ?C?PLDOPTR
+  C:0890H         PUBLIC        ?C?PLDOPTR
+  -------         ENDMOD        ?C?PLDOPTR
+
+  -------         MODULE        ?C?PSTOPTR
+  C:08C0H         PUBLIC        ?C?PSTOPTR
+  -------         ENDMOD        ?C?PSTOPTR
+
+  -------         MODULE        ?C?ICALL
+  C:0919H         PUBLIC        ?C?ICALL
+  C:091DH         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        ?C?PLDIDATA
+  C:091FH         PUBLIC        ?C?PLDIDATA
+  -------         ENDMOD        ?C?PLDIDATA
+
+  -------         MODULE        ?C?PSTIDATA
+  C:0928H         PUBLIC        ?C?PSTIDATA
+  -------         ENDMOD        ?C?PSTIDATA
+
+  -------         MODULE        ?C?PLDXDATA
+  C:0931H         PUBLIC        ?C?PLDXDATA
+  -------         ENDMOD        ?C?PLDXDATA
+
+  -------         MODULE        ?C?PSTXDATA
+  C:093AH         PUBLIC        ?C?PSTXDATA
+  -------         ENDMOD        ?C?PSTXDATA
+
+  -------         MODULE        ?C?PLDPDATA
+  C:0943H         PUBLIC        ?C?PLDPDATA
+  -------         ENDMOD        ?C?PLDPDATA
+
+  -------         MODULE        ?C?PSTPDATA
+  C:094CH         PUBLIC        ?C?PSTPDATA
+  -------         ENDMOD        ?C?PSTPDATA
+
+  -------         MODULE        ?C?PLDCODE
+  C:0955H         PUBLIC        ?C?PLDCODE
+  -------         ENDMOD        ?C?PLDCODE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0177H BYTE (18%) *
+******************************************************************************
+
+Program Size: data=31.0 xdata=0 code=743
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

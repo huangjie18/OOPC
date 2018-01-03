@@ -1,0 +1,69 @@
+/*  cx17-ap6.c   */
+#include "stdio.h"
+#include "malloc.h"
+
+#define CLASS(type)\
+typedef struct type type; \
+struct type
+
+#define CTOR(type) \
+void* type##New() \
+{ \
+ struct type *t; \
+ t = (struct type *)malloc(sizeof(struct type)); 
+
+#define FUNCTION_SETTING(f1, f2)  t->f1 = f2;
+#define END_CTOR return (void*)t;  };
+
+/*                             */
+CLASS(Rectangle)
+{
+    void (*init)(struct Rectangle*, double, double);
+	double (*cal_area)(struct Rectangle*);
+	double (*cal_perimeter)(struct Rectangle*);
+	double length;
+    double width;
+};
+
+double cal_area_imp(Rectangle* cthis)
+{
+	return cthis->length * cthis->width;
+}
+
+double cal_perimeter_imp(Rectangle* cthis)
+{
+   return (cthis->length + cthis->width) * 2;
+}
+
+void init_imp(Rectangle* cthis, double len, double wid)
+{
+   cthis->length = len;
+   cthis->width = wid;
+}
+
+CTOR(Rectangle)
+   FUNCTION_SETTING(init, init_imp)
+   FUNCTION_SETTING(cal_area,cal_area_imp)
+   FUNCTION_SETTING(cal_perimeter,cal_perimeter_imp)
+END_CTOR
+/*------------------------------------------*/
+int main()
+{
+   Rectangle* pr;
+   pr = (Rectangle*)RectangleNew();
+   pr->init(pr, 10.5, 20.5);
+   
+   double v;
+   v = pr->cal_area(pr);
+   printf("area=%7.3f\n", v);
+
+   v = pr->cal_perimeter(pr);
+   printf("area=%7.3f\n", v);
+   
+   getchar();
+   return 0;
+}
+
+
+
+

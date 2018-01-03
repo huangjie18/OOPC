@@ -1,0 +1,75 @@
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 11:40:35 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_HANDLER
+OBJECT MODULE PLACED IN EX33-handler.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-handler.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-handler.c  */
+   2          #include <REG52.H>
+   3          #include <string.h>
+   4          #include "lw_oopc_kc.h"
+   5          #include "ex33-evs.h"
+   6          #include "ex33-handler.h"
+   7          
+   8          extern void* StopNew();
+   9          extern void* MoveNew();
+  10          extern void* g_delay(unsigned int);
+  11          
+  12          static void init(Handler*t) {
+  13   1          t->list[0] = StopNew();
+  14   1              t->list[1] = MoveNew();
+  15   1              t->state = 'I';
+  16   1       }
+  17                  
+  18          static void perform_action(Handler *t) {
+  19   1          t->es_obj->perform();  
+  20   1      }
+  21          
+  22          static void goto_S(Handler *t){
+  23   1         t->state = 'S';
+  24   1         t->es_obj = t->list[0];
+  25   1      }
+  26          static void goto_M(Handler *t){
+  27   1         t->state = 'M';
+  28   1         t->es_obj = t->list[1];
+  29   1      }
+  30          
+  31          static void change_state(Handler *t) {
+  32   1              switch(t->state) {
+  33   2                 case 'I':
+  34   2                    goto_S(t);
+  35   2                        break;
+  36   2                 case 'S':
+  37   2                        goto_M(t);
+  38   2                        break;
+  39   2                 case 'M':
+  40   2                        goto_S(t);
+  41   2                        break;
+  42   2                }
+  43   1                perform_action(t);
+  44   1                g_delay(6000);
+  45   1      }
+  46          
+  47          CTOR(Handler)
+  48   1              FUNCTION_SETTING(init, init)
+  49   1              FUNCTION_SETTING(change_state, change_state)
+  50   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    289    ----
+   CONSTANT SIZE    =   ----    ----
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 11:40:35 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

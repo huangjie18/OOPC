@@ -1,0 +1,6 @@
+"BLINKY.obj",
+"EX33-handler.obj",
+"EX33-move.obj",
+"EX33-stop.obj" 
+TO "BLINKY" 
+RAMSIZE(256) 

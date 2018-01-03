@@ -1,0 +1,62 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 22:56:14 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-07.C (BLINKY.C) */
+   2          #include <REG51F.H>
+   3          #define LW_OOPC_PURE_STATIC
+   4          #include "lw_oopc_kc.h"
+   5          
+   6          static void wait (void)  {                   /* wait function */
+   7   1        ;                                   /* only to delay for LED flashes */
+   8   1      }
+   9          
+  10          CLASS(LED)
+  11          {
+  12            void (*run)();
+  13          };
+  14          
+  15          static void running()
+  16          {
+  17   1        unsigned int i;              /* Delay var */
+  18   1        unsigned char j;  
+  19   1       for (j=0x01; j< 0x80; j<<=1)  {   /* Blink LED 0, 1, 2, 3, 4, 5, 6 */
+  20   2            P1 = j;                         /* Output to LED Port */
+  21   2            for (i = 0; i < 10000; i++)  {  /* Delay for 10000 Counts */
+  22   3             wait ();                       /* call wait function */
+  23   3            }
+  24   2          }
+  25   1        for (j=0x80; j> 0x01; j>>=1)  {   /* Blink LED 6, 5, 4, 3, 2, 1 */
+  26   2            P1 = j;                         /* Output to LED Port */
+  27   2            for (i = 0; i < 10000; i++)  {  /* Delay for 10000 Counts */
+  28   3             wait ();                       /* call wait function */
+  29   3            }
+  30   2          }
+  31   1      }
+  32          /* --------------------------------*/
+  33          void main (void)  {
+  34   1         LED le; 
+  35   1         le.run = running;
+  36   1         while(1) {
+  37   2            le.run();  
+  38   2         }
+  39   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     86    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

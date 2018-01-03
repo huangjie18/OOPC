@@ -75,9 +75,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="冒泡排序.c" />
     <ClCompile Include="分块查找.c" />
     <ClCompile Include="哈希查找.c" />
     <ClCompile Include="拆半查找.c" />
+    <ClCompile Include="选择排序.c" />
     <ClCompile Include="顺序查找.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

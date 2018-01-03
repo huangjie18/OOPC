@@ -1,0 +1,53 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_C_Code(Chap29-33)\Chap_32\BLINKY-02-IoC\BLINKY.uv2
+Project File Date:  01/17/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+compiling BLINKY.C...
+BLINKY.C(5): warning C318: can't open file 'ex16-idisp.h'
+BLINKY.C(6): warning C318: can't open file 'ex16-int.h'
+BLINKY.C(14): error C141: syntax error near 'IDisplay'
+BLINKY.C(14): error C129: missing ';' before '*'
+compiling ex32-int.C...
+ex32-int.C(5): warning C318: can't open file 'ex16-idisp.h'
+ex32-int.C(6): warning C318: can't open file 'ex16-int.h'
+EX32-INT.C(8): error C141: syntax error near '*', expected ')'
+EX32-INT.C(9): error C202: 't': undefined identifier
+EX32-INT.C(11): error C141: syntax error near '*', expected ')'
+EX32-INT.C(12): error C202: 't': undefined identifier
+EX32-INT.C(14): error C141: syntax error near '*', expected ')'
+EX32-INT.C(14): error C230: 'Integer': unknown struct/union/enum tag
+EX32-INT.C(14): error C141: syntax error near '*', expected ')'
+EX32-INT.C(15): error C202: 't': undefined identifier
+EX32-INT.C(16): error C202: 't': undefined identifier
+EX32-INT.C(17): error C202: 't': undefined identifier
+Target not created
+Build target 'Simulator'
+compiling BLINKY.C...
+compiling ex32-int.C...
+ex32-int.C(5): warning C318: can't open file 'ex16-idisp.h'
+ex32-int.C(6): warning C318: can't open file 'ex16-int.h'
+EX32-INT.C(8): error C141: syntax error near '*', expected ')'
+EX32-INT.C(9): error C202: 't': undefined identifier
+EX32-INT.C(11): error C141: syntax error near '*', expected ')'
+EX32-INT.C(12): error C202: 't': undefined identifier
+EX32-INT.C(14): error C141: syntax error near '*', expected ')'
+EX32-INT.C(14): error C230: 'Integer': unknown struct/union/enum tag
+EX32-INT.C(14): error C141: syntax error near '*', expected ')'
+EX32-INT.C(15): error C202: 't': undefined identifier
+EX32-INT.C(16): error C202: 't': undefined identifier
+EX32-INT.C(17): error C202: 't': undefined identifier
+Target not created
+Build target 'Simulator'
+compiling ex32-int.C...
+linking...
+Program Size: data=22.0 xdata=1032 code=1158
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

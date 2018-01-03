@@ -1,0 +1,6 @@
+"BLINKY.obj",
+"EX31-channel.obj",
+"EX31-ctrl.obj",
+"EX31-led.obj" 
+TO "BLINKY" 
+RAMSIZE(256) 

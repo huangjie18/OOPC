@@ -1,0 +1,35 @@
+/*  CX11-mat.c  */
+#include "stdio.h"
+#include "lw_oopc.h"
+#include "cx11-mat.h"
+
+static void init(Matrix* t, double** A, int sz)
+{  int i, j;
+   t->size = sz;
+   /* 產生一個二維陣列 */
+   t->V = (double**)malloc((sz) * sizeof(double *));
+   for(i=0; i < sz; i++)
+      t->V[i] = (double*)malloc((sz) * sizeof(double));
+   for(j=0; j<sz; j++)
+	for(i=0; i<sz; i++)
+	   t->V[j][i] = A[j][i];
+}
+static void normalize(Matrix* t)   /* 矩陣正規化運算  */
+ { int sz,i,j;
+   double ss;
+   sz = t->size;
+   for (j = 0; j < sz; j++)
+    {  ss = 0;
+      for (i = 0; i < sz; i++)    ss += t->V[i][j];
+      for (i = 0; i < sz; i++)    t->V[i][j] = t->V[i][j] / ss;
+    }
+}
+static double get(Matrix*t, int i, int j)
+  {   return t->V[i][j];  }
+CTOR(Matrix)
+   FUNCTION_SETTING(init, init)
+   FUNCTION_SETTING(normalize, normalize)
+   FUNCTION_SETTING(get, get)
+END_CTOR
+
+

@@ -1,0 +1,17 @@
+/* cx22-ap2.c  */
+#include <stdio.h>
+#include "cx22-lig.h"
+#include "cx22-ref.h"
+
+int main()
+{
+	IR* refri = (IR*)RefriNew();
+	refri->init(refri);
+	refri->openTheDoor(refri);
+	refri->closeTheDoor(refri);
+	refri->openTheDoor(refri);
+	refri->openTheDoor(refri);
+	getchar();
+	return 0;
+}
+

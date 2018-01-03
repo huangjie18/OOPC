@@ -1,0 +1,30 @@
+/*  cx14-vm.c  */
+#include <stdio.h>
+#include "cx14-con.h"
+#include "cx14-vm.h"
+
+static void init(void*t)
+{
+    VendingMachine* cthis = (VendingMachine*)t;
+    cthis->total_amount = 0;
+}
+
+static void feedCoin(void*t, ICoin* c)
+   {  double v;
+      VendingMachine* cthis = (VendingMachine*)t;
+      v = c->value(c);
+      cthis->total_amount += v;
+      printf("%6.2f\n",c->value(c));
+  }
+static double getTotal(void*t)
+  {
+    VendingMachine* cthis = (VendingMachine*)t;
+    return cthis->total_amount;
+  }
+CTOR(VendingMachine)
+   FUNCTION_SETTING(init, init)
+   FUNCTION_SETTING(feedCoin, feedCoin)
+   FUNCTION_SETTING(getTotal, getTotal)
+END_CTOR
+
+

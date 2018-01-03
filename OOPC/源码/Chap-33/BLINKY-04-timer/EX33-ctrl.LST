@@ -1,0 +1,115 @@
+C51 COMPILER V8.01   EX33_CTRL                                                             05/19/2008 10:30:49 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_CTRL
+OBJECT MODULE PLACED IN EX33-ctrl.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-ctrl.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-ctrl.c  */
+   2          #include <REG52.H>
+   3          #include "ex33-ifs.h"
+   4          #include "ex33-ctrl.h"
+   5          
+   6          extern void* HandlerSetting(void*);
+   7          extern void* PreparingSetting(void*);
+   8          extern void* FlyingSetting(void*);
+   9          
+  10          static CTRL *pL;
+  11          static long count;
+  12          static int max;
+  13          
+  14          void init_timer1() {
+  15   1        TMOD &= 0x0F;
+  16   1        TMOD |= 0x10;
+  17   1        TH1 = 0x00; 
+  18   1        TL1 = 0x00; 
+  19   1        ET1 = 1;
+  20   1        TR1 = 1;
+  21   1        EA = 1;
+  22   1        }
+  23          
+  24          void reload_timer1() {
+  25   1        TR1 = 0;
+  26   1        TH1 = 0x00; 
+  27   1        TL1 = 0x00; 
+  28   1        TR1 = 1;
+  29   1        }  
+  30          static void init(CTRL *t){
+  31   1          PreparingSetting(&t->pObj);
+  32   1              t->pObj.init(&t->pObj);
+  33   1              
+  34   1              FlyingSetting(&t->fObj);
+  35   1              t->fObj.init(&t->fObj);
+  36   1              
+  37   1          HandlerSetting(&t->hObj);
+  38   1              t->hObj.init(&t->hObj);
+  39   1                                                       
+  40   1              t->state = 'I';
+  41   1              pL = t;
+  42   1              max = 400;
+  43   1      }
+  44          
+  45          static void goto_P(CTRL *t){
+  46   1         t->state = 'P';
+  47   1         t->hObj.fs = (IFlyState*)(&t->pObj);
+  48   1       //  t->hObj.run(&t->hObj);
+  49   1      }
+  50          
+  51          static void goto_F(CTRL *t){
+  52   1         t->state = 'F';
+  53   1         t->hObj.fs =(IFlyState*)(&t->fObj);
+  54   1        // t->hObj.run(&t->hObj);
+  55   1      }
+C51 COMPILER V8.01   EX33_CTRL                                                             05/19/2008 10:30:49 PAGE 2   
+
+  56          
+  57          static void run(CTRL *t) {
+  58   1          count = 0;
+  59   1              switch(t->state) {
+  60   2                 case 'I':
+  61   2                    goto_P(t);
+  62   2                        break;
+  63   2                 case 'P':
+  64   2                    goto_F(t);
+  65   2                        break;
+  66   2                 case 'F':
+  67   2                        goto_P(t);
+  68   2                        break;
+  69   2                }
+  70   1        }
+  71          
+  72          static void call_back() interrupt 3 {
+  73   1                              count++;
+  74   1                              if(count > max)  run(pL);
+  75   1                              reload_timer1();
+  76   1      }
+  77          
+  78          
+  79          static void start(CTRL *t) {
+  80   1        //  P0 = 0x00;
+  81   1              count = 0;
+  82   1              init_timer1();
+  83   1              t->hObj.start();
+  84   1         }
+  85           
+  86          CTOR(CTRL)
+  87   1              FUNCTION_SETTING(init, init)
+  88   1              FUNCTION_SETTING(start, start)
+  89   1      END_CTOR
+  90          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    549    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

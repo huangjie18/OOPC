@@ -1,0 +1,37 @@
+/*  cx14-ap2.c   */
+#include "lw_oopc.h"
+#include "cx14-con.h"
+#include "cx14-vm.h"
+
+int main()
+{
+  ICoin *c1, *c5, *c10;  double v;
+  VendingMachine* vm = (VendingMachine*)VendingMachineNew();
+  vm->init(vm);
+
+  c1 = (ICoin*)one_dollarNew();
+  c1->init();
+  vm->feedCoin(vm, c1);
+
+  c5 = (ICoin*)five_dollarNew();
+  c5->init();
+  vm->feedCoin(vm, c5);
+
+  c10 = (ICoin*)ten_dollarNew();
+  c10->init();
+  vm->feedCoin(vm, c10);
+
+  c5 = (ICoin*)five_dollarNew();
+  c5->init();
+  vm->feedCoin(vm, c5);
+
+  vm->feedCoin(vm, c1);
+
+  v = vm->getTotal(vm);
+  printf("total=%6.2f\n", v);
+
+  getchar();
+  return 0;
+  }
+
+

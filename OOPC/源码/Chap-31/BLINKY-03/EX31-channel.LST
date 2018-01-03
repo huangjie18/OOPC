@@ -1,0 +1,53 @@
+C51 COMPILER V8.01   EX31_CHANNEL                                                          05/19/2008 04:27:05 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX31_CHANNEL
+OBJECT MODULE PLACED IN EX31-channel.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX31-channel.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  EX31-channel.c   */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex31-ip.h"
+   5          
+   6          CLASS(Channel_0)
+   7          {
+   8            IMPLEMENTS(IPort);
+   9          };
+  10          
+  11          static void send_code_P0(char x) {
+  12   1              P0 = x;
+  13   1      }
+  14          
+  15          CTOR(Channel_0)
+  16   1              FUNCTION_SETTING(IPort.send, send_code_P0);
+  17   1      END_CTOR
+  18          /*--------------------------------------------- */
+  19          CLASS(Channel_1)
+  20          {
+  21            IMPLEMENTS(IPort);
+  22          };
+  23          
+  24          static void send_code_P1(char y) {
+  25   1          P1 = y;
+  26   1      }
+  27          
+  28          CTOR(Channel_1)
+  29   1              FUNCTION_SETTING(IPort.send, send_code_P1);
+  30   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    108    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

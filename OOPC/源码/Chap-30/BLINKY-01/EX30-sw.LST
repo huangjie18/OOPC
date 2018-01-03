@@ -1,0 +1,58 @@
+C51 COMPILER V8.01   EX30_SW                                                               05/19/2008 02:10:09 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX30_SW
+OBJECT MODULE PLACED IN EX30-sw.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX30-sw.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  cx30-sw.c  */
+   2          #include <stdio.h>
+   3          #include "EX30-sw.h"
+   4          
+   5          static void init(void *t)
+   6          {
+   7   1      Switch* cthis = (Switch*) t;
+   8   1      cthis->state = 0;
+   9   1      }
+  10          
+  11          static int get_state(void* t)
+  12          {
+  13   1         Switch* cthis = (Switch*) t;
+  14   1      return cthis->state;
+  15   1      }
+  16          
+  17          static void  set_switch(void* t)
+  18          {
+  19   1        int st;
+  20   1        Light* light;
+  21   1        Switch* cthis = (Switch*) t;
+  22   1        cthis->state = !(cthis->state);
+  23   1        light = cthis->light_obj;
+  24   1        st = light->get_state(light);
+  25   1        if (st == 1)
+  26   1             light->set_light(light, 0);
+  27   1        else
+  28   1             light->set_light(light, 1);
+  29   1      }
+  30          
+  31          CTOR(Switch)
+  32   1      FUNCTION_SETTING(init, init);
+  33   1      FUNCTION_SETTING(get_state, get_state);
+  34   1      FUNCTION_SETTING(set_switch, set_switch);
+  35   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    240    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

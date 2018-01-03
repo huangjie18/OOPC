@@ -1,0 +1,39 @@
+/* cx17-ap2.c  */
+#include "stdio.h"
+#include "malloc.h"
+
+struct Rectangle
+{
+    double length;
+    double width;
+};
+
+double cal_area(struct Rectangle* rec)
+{
+	return rec->length * rec->width;
+}
+
+double cal_perimeter(struct Rectangle* rec)
+{
+   return (rec->length + rec->width) * 2;
+}
+
+/*------------------------------------------*/
+int main()
+{
+   struct Rectangle* pr;
+   double v;
+   pr = (struct Rectangle*)malloc(sizeof(struct Rectangle));
+   pr->length = 10.5;
+   pr->width = 20.5;
+
+   v = cal_area(pr);
+   printf("area=%7.3f\n", v);
+
+   v = cal_perimeter(pr);
+   printf("perimeter=%7.3f\n", v);
+
+   getchar();
+   return 0;
+}
+

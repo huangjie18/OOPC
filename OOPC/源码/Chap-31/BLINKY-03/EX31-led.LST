@@ -1,0 +1,58 @@
+C51 COMPILER V8.01   EX31_LED                                                              05/19/2008 04:29:09 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX31_LED
+OBJECT MODULE PLACED IN EX31-led.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX31-led.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  EX31-led.c   */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex31-led.h"
+   5          
+   6          void g_delay(unsigned int ms) {
+   7   1         int i, j;
+   8   1         for(i=0; i<ms; i++)
+   9   1            for(j=0; j<120; j++);
+  10   1      }
+  11          
+  12          static unsigned char SEGTAB[] = {0xC0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x83, 0xf8, 0x80, 0x98}; 
+  13          static unsigned char SCANLINE[] = {0xf7, 0xfb, 0xfd, 0xfe}; 
+  14          
+  15          static void show_data(LED *t) {
+  16   1          unsigned char ch, sc;
+  17   1              int i;                             
+  18   1          IPort *pss = t->scan_port;
+  19   1              IPort *pdd = t->data_port;      
+  20   1      
+  21   1              P0 = 0xf0;
+  22   1          for(i=0; i<4; i++)
+  23   1                 {
+  24   2                  ch = SEGTAB[t->digits[i]];
+  25   2                      sc = SCANLINE[i];
+  26   2                      pss->send(0xff);
+  27   2                      pdd->send(ch);
+  28   2                      pss->send(sc);
+  29   2                      g_delay(20000);
+  30   2                 }
+  31   1      }
+  32          
+  33          CTOR(LED)
+  34   1              FUNCTION_SETTING(show_data, show_data)
+  35   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    254    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     14      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

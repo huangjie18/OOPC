@@ -1,0 +1,101 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/23/2008  18:16:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE BLINKY.obj TO BLINKY RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  BLINKY.obj (BLINKY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  BLINKY (BLINKY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0042H     UNIT         ?PR?MAIN?BLINKY
+            CODE    0842H     000CH     UNIT         ?C_C51STARTUP
+            CODE    084EH     0001H     UNIT         ?PR?WAIT?BLINKY
+
+
+
+OVERLAY MAP OF MODULE:   BLINKY (BLINKY)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?BLINKY
+
+?PR?MAIN?BLINKY
+  +--> ?PR?WAIT?BLINKY
+
+
+
+SYMBOL TABLE OF MODULE:  BLINKY (BLINKY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BLINKY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:0800H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/23/2008  18:16:42  PAGE 2
+
+
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:084EH         PUBLIC        wait
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          WAIT
+  C:084EH         LINE#         4
+  C:084EH         LINE#         6
+  -------         ENDPROC       WAIT
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         8
+  C:0800H         LINE#         12
+  C:0800H         LINE#         13
+  C:0808H         LINE#         14
+  C:080AH         LINE#         15
+  C:080DH         LINE#         16
+  C:0810H         LINE#         17
+  C:081BH         LINE#         18
+  C:0821H         LINE#         20
+  C:0829H         LINE#         21
+  C:082BH         LINE#         22
+  C:082EH         LINE#         23
+  C:0831H         LINE#         24
+  C:083CH         LINE#         25
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BLINKY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0043H BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=82
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

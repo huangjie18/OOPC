@@ -1,0 +1,82 @@
+/*  cx17-ap9.c   */
+#include "stdio.h"
+#include "malloc.h"
+
+#define CLASS(type)\
+typedef struct type type; \
+struct type
+
+#define CTOR(type) \
+void* type##New() \
+{ \
+ struct type *t; \
+ t = (struct type *)malloc(sizeof(struct type)); 
+
+#define CTOR2(type, type2) \
+void* type2##New() \
+{ \
+ struct type *t; \
+ t = (struct type *)malloc(sizeof(struct type)); 
+
+#define END_CTOR return (void*)t;  };
+#define FUNCTION_SETTING(f1, f2)  t->f1 = f2;
+#define IMPLEMENTS(type) struct type type
+#define INTERFACE(type) \
+typedef struct type type; \
+struct type
+/* ------------------------------------- */
+INTERFACE(IA)
+{
+    void (*init)(void*, double, double);
+    double (*cal_area)(void*);
+    double (*cal_perimeter)(void*);
+};
+/* ------------------------------------- */
+CLASS(NewRect)
+{
+    IMPLEMENTS(IA);
+    double length;
+    double width;
+};
+
+void init_imp(void* t, double len, double wid)
+{
+   NewRect* cthis = (NewRect*)t;
+   cthis->length = len;
+   cthis->width = wid;
+}
+
+double cal_area_imp(void* t)
+{
+   NewRect* cthis = (NewRect*)t;
+   return cthis->length * cthis->width;
+}
+
+double cal_perimeter_imp(void* t)
+{
+   NewRect* cthis = (NewRect*)t;
+   return (cthis->length + cthis->width) * 2;
+}
+
+CTOR2(NewRect, Rectangle)
+   FUNCTION_SETTING(IA.init, init_imp)
+   FUNCTION_SETTING(IA.cal_area,cal_area_imp)
+   FUNCTION_SETTING(IA.cal_perimeter,cal_perimeter_imp)
+END_CTOR
+/*------------------------------------------*/
+int main()
+{
+   IA* pr;  double v;
+   pr = (IA*)RectangleNew();
+   pr->init(pr, 10.5, 20.5);
+
+   v = pr->cal_area(pr);
+   printf("area=%7.2f\n", v);
+
+   v = pr->cal_perimeter(pr);
+   printf("perimeter=%7.2f\n", v);
+
+   getchar();
+   return 0;
+}
+

@@ -1,0 +1,54 @@
+C51 COMPILER V8.01   EX32_FACTORY                                                          05/19/2008 11:26:23 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_FACTORY
+OBJECT MODULE PLACED IN EX32-Factory.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-Factory.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-factory.c */
+   2          #include "lw_oopc_kc.h"
+   3          #include "ex32-ctrl.h"
+   4          #include "ex32-factory.h"
+   5          
+   6          extern void* CTRLNew();
+   7          extern void* LED_P0New();
+   8          extern void* LED_P1New();
+   9          
+  10          static void init(Factory *t) {
+  11   1          t->ctrl = CTRLNew();
+  12   1              t->list[0] = (IL*)LED_P0New();
+  13   1              t->list[1] = (IL*)LED_P1New();
+  14   1              t->ctrl->pa = t->list[0];
+  15   1              t->ctrl->pb = t->list[1];
+  16   1      }
+  17          
+  18          static CTRL* get_CTRL(Factory *t){
+  19   1        return t->ctrl;
+  20   1        }
+  21          
+  22          static void destroy(Factory *t) {
+  23   1              free(t->list[0]);
+  24   1          free(t->list[1]);
+  25   1      }
+  26          
+  27          CTOR(Factory)
+  28   1        FUNCTION_SETTING(init, init)
+  29   1        FUNCTION_SETTING(get_CTRL, get_CTRL)
+  30   1        FUNCTION_SETTING(destroy, destroy)
+  31   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    286    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

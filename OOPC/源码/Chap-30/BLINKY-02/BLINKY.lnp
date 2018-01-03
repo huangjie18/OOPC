@@ -1,0 +1,6 @@
+"EX30-light-r.obj",
+"EX30-light-l.obj",
+"EX30-ctrl.obj",
+"BLINKY.obj" 
+TO "BLINKY" 
+RAMSIZE(256) 

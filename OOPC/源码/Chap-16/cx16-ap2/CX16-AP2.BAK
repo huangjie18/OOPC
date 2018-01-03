@@ -1,0 +1,78 @@
+/*  cx16-ap2.c   */
+#include "stdio.h"
+#include "lw_oopc.h"
+#include "llist.h"
+
+CLASS(BaseballTeam)
+{
+   void (*init)(void*);
+   void (*setManager)(void*, char*);
+   void (*setCoach)(void*, char*);
+   void (*addPlayer)(void*, char*);
+   void (*display)(void*);
+   char *manager, *coach;
+   IColl *players;
+};
+
+static void init(void* t)
+     {
+	   BaseballTeam* cthis = (BaseballTeam*) t;
+	   cthis->manager = NULL;
+	   cthis->coach = NULL;
+       cthis->players = (IColl*)LListNew();
+	   cthis->players->init(cthis->players);
+     }
+static void setManager(void* t, char *manager_name)
+       {
+	 BaseballTeam* cthis = (BaseballTeam*) t;
+	 cthis->manager = manager_name;
+       }
+static void setCoach(void*t, char *coach_name)
+       {
+	 BaseballTeam* cthis = (BaseballTeam*) t;
+	 cthis->coach = coach_name;
+       }
+static void addPlayer(void* t, char *player_name )
+       {
+	  BaseballTeam* cthis = (BaseballTeam*) t;
+	  IColl *list = cthis->players;
+	  list->add(list, (void*)player_name);
+     }
+
+void display(void*t)
+       {
+         BaseballTeam* cthis = (BaseballTeam*) t;
+	     printf("%s\n", cthis->manager);
+         printf("%s\n", cthis->coach);
+         
+		 IColl *list = cthis->players;
+	     list->top(list);
+		 char* text = (char*)list->next(list);
+		 while(text != NULL )
+		 {
+			 printf("%s\n", text);
+			 text = (char*)list->next(list);
+		 }
+       }
+CTOR(BaseballTeam)
+    FUNCTION_SETTING(init, init);
+    FUNCTION_SETTING(setManager, setManager);
+    FUNCTION_SETTING(setCoach, setCoach);
+    FUNCTION_SETTING(addPlayer, addPlayer);
+    FUNCTION_SETTING(display, display);
+END_CTOR
+
+int main()
+{
+     BaseballTeam*  RedSock = BaseballTeamNew();
+     RedSock->init(RedSock);
+     RedSock->setManager(RedSock, "Jamis King");
+     RedSock->setCoach(RedSock, "David Wang" );
+     RedSock->addPlayer(RedSock, "Jim Lin" );
+     RedSock->addPlayer(RedSock, "Alvin Kao" );
+     RedSock->addPlayer(RedSock, "John Coppin" );
+     RedSock->display(RedSock);
+     getchar();
+     return 0;
+
+}

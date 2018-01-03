@@ -1,0 +1,200 @@
+/*  main_ahp.c  */
+/* #include "stdafx.h" */ /* for VC++.NET  */
+#include "stdio.h"
+#include "string.h"
+#include "lw_oopc.h"
+#include "pcmatrix.h"
+#include "iahpnode.h"
+
+extern void* AHPNodeNew();
+extern double temp;
+
+IAHP *goal, *ca0, *ca1, *ca00, *ca01, *ca10, *ca11, *ca12;
+/* ---------------------------------- */
+void Input_PCMatrix()
+{
+  double a;
+  int i;
+  char ** caNames;
+  double ** A;
+ 
+  goal = (IAHP*)AHPNodeNew();
+  goal->init(goal, "Evaluate Build Quality");
+  goal->goal_initial(goal);
+
+  caNames = (char**)malloc(2 * sizeof(char *));
+  for(i=0; i < 2; i++)
+     caNames[i] = (char*)malloc(40 * sizeof(char));
+
+  strcpy(caNames[0], "Performance");
+  strcpy(caNames[1], "Functionality");
+
+  A = (double**)malloc(2 * sizeof(double *));
+  for(i=0; i < 2; i++)
+  { A[i] = (double*)malloc(2 * sizeof(double));
+    A[i][i] = 1.0;
+  }
+
+  A[0][1] = 1.0/4.0;
+  A[1][0] = 4.0;
+
+  goal->setPCMatrix(goal,A,2, caNames);
+  /* goal->go(goal); */
+
+  free(caNames);
+  free(A);
+ /* ------------------------------------------- */
+  caNames = (char**)malloc(2 * sizeof(char *));
+  for(i=0; i < 2; i++)
+     caNames[i] = (char*)malloc(40 * sizeof(char));
+
+  strcpy(caNames[0], "StartUp");
+  strcpy(caNames[1], "File Save");
+  A = (double**)malloc(2 * sizeof(double *));
+  for(i=0; i < 2; i++)
+    { A[i] = (double*)malloc(2 * sizeof(double));
+      A[i][i] = 1.0;
+    }
+
+  A[0][1] = 5.0;
+  A[1][0] = 1.0/5.0;
+
+  ca0 = (IAHP*)goal->get_ca(goal, 0);
+  ca0->setPCMatrix(ca0,A,2, caNames);
+  /* ca0->go(ca0);  */
+
+  free(caNames);
+  free(A);
+ /*  ---------------------------------------  */
+  caNames = (char**)malloc(3 * sizeof(char *));
+  for(i=0; i < 3; i++)
+     caNames[i] = (char*)malloc(40 * sizeof(char));
+
+  strcpy(caNames[0], "User Interface");
+  strcpy(caNames[1], "Database");
+  strcpy(caNames[2], "Network");
+
+  A = (double**)malloc(3 * sizeof(double *));
+  for(i=0; i < 3; i++)
+    { A[i] = (double*)malloc(3 * sizeof(double));
+      A[i][i] = 1.0;
+    }
+
+  A[0][1] = 3.0;
+  A[1][0] = 1.0/3.0;
+  A[0][2] = 7.0;
+  A[2][0] = 1.0/7.0;
+  A[1][2] = 2.0;
+  A[2][1] = 1.0/2.0;
+
+  ca1 = (IAHP*)goal->get_ca(goal, 1);
+  ca1->setPCMatrix(ca1,A,3, caNames);
+  /*  ca1->go(ca1);  */
+
+  /* --------------   Level 2   ---------------- */
+  strcpy(caNames[0], "Build A");
+  strcpy(caNames[1], "Build B");
+  strcpy(caNames[2], "Build C");
+
+  A[0][1] = 3.0;
+  A[1][0] = 1.0/3.0;
+  A[0][2] = 5.0;
+  A[2][0] = 1.0/5.0;
+  A[1][2] = 2.0;
+  A[2][1] = 1.0/2.0;
+
+  ca00 = (IAHP*)ca0->get_ca(ca0, 0);
+  ca00->setPCMatrix(ca00,A,3, caNames);
+  /* ca00->go(ca00);  */
+  /* ---------------------------------------- */
+  A[0][1] = 2.0;
+  A[1][0] = 1.0/2.0;
+  A[0][2] = 4.0;
+  A[2][0] = 1.0/4.0;
+  A[1][2] = 2.0;
+  A[2][1] = 1.0/2.0;
+
+  ca01 = (IAHP*)ca0->get_ca(ca0, 1);
+  ca01->setPCMatrix(ca01,A,3, caNames);
+
+  /* ------------------------------------------- */
+  A[0][1] = 1.0;
+  A[1][0] = 1.0/1.0;
+  A[0][2] = 3.0;
+  A[2][0] = 1.0/3.0;
+  A[1][2] = 2.0;
+  A[2][1] = 1.0/2.0;
+
+  ca10 = (IAHP*)ca1->get_ca(ca1, 0);
+  ca10->setPCMatrix(ca10,A,3, caNames);
+
+  /* -------------------------------------------- */
+  A[0][1] = 3.0;
+  A[1][0] = 1.0/3.0;
+  A[0][2] = 6.0;
+  A[2][0] = 1.0/6.0;
+  A[1][2] = 4.0;
+  A[2][1] = 1.0/4.0;
+
+  ca11 = (IAHP*)ca1->get_ca(ca1, 1);
+  ca11->setPCMatrix(ca11,A,3, caNames);
+
+  /* ------------------------------------------- */
+  A[0][1] = 4.0;
+  A[1][0] = 1.0/4.0;
+  A[0][2] = 5.0;
+  A[2][0] = 1.0/5.0;
+  A[1][2] = 5.0;
+  A[2][1] = 1.0/5.0;
+
+  ca12 = (IAHP*)ca1->get_ca(ca1, 2);
+  ca12->setPCMatrix(ca12,A,3, caNames);
+  /* ca12->go(ca12); */
+ }
+
+ /* --------------------------------------- */
+ void Analyze()
+ {
+  goal->cal_PV_CR_recursive(goal);
+  goal->cal_weight_recursive(goal);
+ }
+
+ void Print_PV()
+ {
+  ca00->printPV(ca00);
+  ca01->printPV(ca01);
+  ca10->printPV(ca10);
+  ca11->printPV(ca11);
+  ca12->printPV(ca12);
+ }
+
+ void Print_Choice()
+ {
+  printf("Overall\n");
+  temp = 0.0;
+  goal->alternative_wieght_recursive(goal, "Build A");
+  printf("Build A=%7.3f\n", temp);
+
+  temp = 0.0;
+  goal->alternative_wieght_recursive(goal, "Build B");
+  printf("Build B=%7.3f\n", temp);
+
+  temp = 0.0;
+  goal->alternative_wieght_recursive(goal, "Build C");
+  printf("Build C=%7.3f\n", temp);
+ }
+
+void ahp()
+{
+  Input_PCMatrix();
+  Analyze();
+  Print_PV();
+  Print_Choice();
+}
+
+void main()
+{
+  ahp();
+  getchar();
+}
+

@@ -1,0 +1,40 @@
+C51 COMPILER V8.01   EX33_FLYSTATE                                                         05/19/2008 10:35:11 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_FLYSTATE
+OBJECT MODULE PLACED IN EX33-FlyState.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-FlyState.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-FlyState.c  */
+   2          #include <REG52.H>
+   3          #include <string.h>
+   4          #include "lw_oopc_kc.h"
+   5          #include "ex33-ifs.h"
+   6          
+   7          CLASS(Preparing)
+   8          {
+   9             IMPLEMENTS(IFlyState);
+  10             STATE st;
+  11          };
+  12          
+  13          static void init(void *t){
+  14   1         Preparing *cthis = t;
+  15   1         strcpy(cthis->st.state, "Preparing");
+*** ERROR C204 IN LINE 15 OF EX33-FLYSTATE.C: 'state': undefined member
+  16   1         cthis->st.height = 5000;
+  17   1        }
+  18          
+  19          static Status getStatus(void *t) {
+*** ERROR C129 IN LINE 19 OF EX33-FLYSTATE.C: missing ';' before 'getStatus'
+  20             Preparing *cthis = t;
+  21             return cthis->st;
+  22          }
+  23          
+  24          CTOR(Preparing)
+  25                  FUNCTION_SETTING(IFlyState.init, init)
+  26                  FUNCTION_SETTING(IFlyState.getStatus, getStatus)
+  27          END_CTOR
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)

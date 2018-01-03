@@ -1,0 +1,61 @@
+C51 COMPILER V8.01   EX31_CTRL                                                             05/19/2008 04:28:30 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX31_CTRL
+OBJECT MODULE PLACED IN EX31-ctrl.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX31-ctrl.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX31-ctrl.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex31-ctrl.h"
+   5          
+   6          extern void* LEDNew();
+   7          extern void* Channel_0New();
+   8          extern void* Channel_1New();
+   9          extern void g_delay(unsigned int);
+  10          
+  11          static int buffer[10] = {7, 2, 0, 4};
+  12          
+  13          static void load_data(LED *t) {
+  14   1          t->digits[0] = buffer[0];
+  15   1              t->digits[1] = buffer[1];
+  16   1              t->digits[2] = buffer[2];
+  17   1              t->digits[3] = buffer[3];
+  18   1      }
+  19          
+  20          static void init(CTRL *t)
+  21          {
+  22   1         t->ple = LEDNew();
+  23   1         t->ps = Channel_0New();
+  24   1         t->pd = Channel_1New();
+  25   1         t->ple->load_data = load_data;
+  26   1         t->ple->scan_port = t->ps;
+  27   1         t->ple->data_port = t->pd;
+  28   1      
+  29   1      }
+  30          
+  31          static void run(CTRL *t) {
+  32   1                 t->ple->load_data(t->ple);
+  33   1                 t->ple->show_data(t->ple);
+  34   1      }
+  35          CTOR(CTRL)
+  36   1              FUNCTION_SETTING(init, init)
+  37   1              FUNCTION_SETTING(run, run)
+  38   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    383    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     20       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

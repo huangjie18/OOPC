@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include "cx12-sw.h"
+
+int main()
+{
+    Switch* psw1 = (Switch*)SwitchNew();
+    Switch* psw2 = (Switch*)SwitchNew();
+    psw1->init(psw1);
+    psw2->init(psw2);
+    /*  press PSW1  */
+    psw1->set_switch(psw1);
+    /*  press PSW2  */
+    psw2->set_switch(psw2);
+    /*  press PSW2  */
+    psw2->set_switch(psw2);
+    /*  press PSW1  */
+    psw1->set_switch(psw1);
+    getchar();
+    return 0;
+}
+

@@ -1,0 +1,74 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:34:00 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  EX30-ap-1.c (BLINKY.c)   */
+   2          #include <REG52.H>
+   3          #include <stdio.h>
+   4          #include "EX30-lig.h"
+   5          #include "EX30-sw.h"
+   6          
+   7          extern void* LightNew();
+   8          extern void* SwitchNew();
+   9          
+  10          void g_delay(unsigned int ms) {
+  11   1         int i, j;
+  12   1         for(i=0; i<ms; i++)
+  13   1            for(j=0; j<120; j++);
+  14   1      }
+  15          
+  16          char xdata MemPool[1024];
+  17          
+  18          void main()
+  19          {
+  20   1          Light* light;  Switch* wall;   Switch* door;
+  21   1      
+  22   1              init_mempool(MemPool,sizeof(MemPool));
+  23   1          
+  24   1              light = (Light*)LightNew();
+  25   1          wall = (Switch*)SwitchNew();
+  26   1          door = (Switch*)SwitchNew();
+  27   1          light->init(light);
+  28   1      
+  29   1          wall->light_obj = light;
+  30   1          door->light_obj = light;
+  31   1      
+  32   1              wall->set_switch(wall);
+  33   1              
+  34   1              while(1) {
+  35   2                 /* ¤W¼Ó¡Gpress PSW1  */
+  36   2             wall->set_switch(wall);
+  37   2                 g_delay(18000);
+  38   2             /*  press PSW2  */
+  39   2             door->set_switch(door);
+  40   2                 g_delay(18000);
+  41   2      
+  42   2             /* ¤U¼Ó¡G press PSW2  */
+  43   2             door->set_switch(door);
+  44   2                 g_delay(18000);
+  45   2             /*  press PSW1  */
+  46   2                 wall->set_switch(wall);
+  47   2                 g_delay(18000);
+  48   2              }
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    314    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:34:00 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,126 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 19:10:20 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-06.C (BLINKY.C)  */
+   2          #include <REG51F.H>
+   3          #define LW_OOPC_STATIC
+   4          #include "lw_oopc_kc.h"
+   5          
+   6          void wait (void)  {              
+   7   1             ;                              
+   8   1           }
+   9          
+  10          CLASS(LED)
+  11          {
+  12             void (*run)();
+  13          };
+  14          
+  15          static void run(){
+  16   1           unsigned int i;              
+  17   1           unsigned char j;      
+  18   1               
+  19   1               for (j=0x01; j< 0x80; j<<=1)  {   
+  20   2              P1 = j;                         
+  21   2              for (i = 0; i < 10000; i++)  {  
+  22   3                  wait ();                      
+  23   3              }
+  24   2          }
+  25   1      
+  26   1          for (j=0x80; j> 0x01; j>>=1)  {  
+  27   2             P1 = j;                         
+  28   2             for (i = 0; i < 10000; i++)  { 
+  29   3                wait ();                      
+  30   3            }    
+  31   2          }
+  32   1      }
+  33          
+  34          CTOR(LED)
+  35   1         FUNCTION_SETTING(run, run)
+  36   1      END_CTOR
+  37          /* -------------------------------------- */
+  38          
+  39          char NUMB[10] = {0xC0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x83, 0xf8, 0x80, 0x98}; 
+  40          
+  41          CLASS(SEG)
+  42          {
+  43             void (*show)();
+  44          };
+  45          
+  46          static void show(){
+  47   1           unsigned int x, i;              
+  48   1               
+  49   1               for (x=0; x < 10; x++)  {   
+  50   2              P0 = NUMB[x];                         
+  51   2              for (i = 0; i < 10000; i++)  {  
+  52   3                  wait ();                      
+  53   3              }
+  54   2          }
+  55   1       }
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 19:10:20 PAGE 2   
+
+  56          
+  57          CTOR(SEG)
+  58   1         FUNCTION_SETTING(show, show)
+  59   1      END_CTOR
+  60          /* ------------------------------------- */
+  61          
+  62          CLASS(LED2)
+  63          {
+  64             void (*run2)();
+  65          };
+  66          
+  67          static void run2(){
+  68   1        P3 = 0xaa;
+  69   1      }
+  70          
+  71          CTOR(LED2)
+  72   1         FUNCTION_SETTING(run2, run2)
+  73   1      END_CTOR
+  74          
+  75          /* --------------------------------------- */
+  76          CLASS(Controller)
+  77          {
+  78              void (*doing)();
+  79          };
+  80          
+  81          static void doing()
+  82          {
+  83   1      LED le;           SEG sg;              LED2 le2;
+  84   1      LEDSetting(&le);   SEGSetting(&sg);             LED2Setting(&le2);
+  85   1                                    
+  86   1          while (1) {                       
+  87   2                 le2.run2();
+  88   2              le.run();
+  89   2                 sg.show();
+  90   2              }
+  91   1      }
+  92          
+  93          CTOR(Controller)
+  94   1         FUNCTION_SETTING(doing, doing);
+  95   1      END_CTOR
+  96          /* ---------------------------------------- */
+  97          void main (void)  {
+  98   1         Controller ctrl;
+  99   1         ControllerSetting(&ctrl);
+ 100   1         ctrl.doing();
+ 101   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    313    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10      24
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

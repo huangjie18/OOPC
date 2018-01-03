@@ -1,0 +1,30 @@
+/* CX11-ap2.c */
+#include "stdio.h"
+#include "string.h"
+#include "lw_oopc.h"
+#include "Matrix.h"
+#include "light.h"
+
+extern void* MatrixNew();
+extern void* LightNew();
+void main(){ 
+  Matrix* pcm = (Matrix*)MatrixNew();   /*  誕生Matrix物件  */
+  double ** A;     /*  先把值存入A[][]裡  */
+  double a = 0.0;
+  A = (double**)malloc(2 * sizeof(double *));
+  for(int i=0; i < 2; i++)
+       { A[i] = (double*)malloc(2 * sizeof(double)); 
+        A[i][i] = 1.0;  }
+  A[0][1] = 1.0/4.0;
+  A[1][0] = 4.0;
+  pcm->init(pcm,A,2);   /*  把A[][]值傳過去，以設定物件初值  */
+  pcm->normalize(pcm);   /*  呼叫normalize()已進行矩陣正規化運算  */
+  a = pcm->get(pcm, 0, 0);     printf("a=%7.3f\n", a);  /* 取出矩陣元素值 */
+  a = pcm->get(pcm, 0, 1);     printf("a=%7.3f\n", a);
+  a = pcm->get(pcm, 1, 0);     printf("a=%7.3f\n", a);
+  a = pcm->get(pcm, 1, 1);     printf("a=%7.3f\n", a);
+  getchar();
+}
+
+
+

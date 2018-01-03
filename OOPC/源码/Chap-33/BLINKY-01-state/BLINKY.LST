@@ -1,0 +1,96 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 09:59:46 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX17-ap-1.c */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          
+   5          void g_delay(unsigned int ms) {
+   6   1         int i, j;
+   7   1         for(i=0; i<ms; i++)
+   8   1            for(j=0; j<120; j++);
+   9   1      }
+  10          
+  11          CLASS(ElevatorController)
+  12          {
+  13             void (*init)(ElevatorController*);
+  14             void (*move)(ElevatorController*);
+  15             void (*stop)(ElevatorController*);
+  16             void (*goto_state_Move)(ElevatorController*);
+  17             void (*goto_state_Stop)(ElevatorController*);
+  18             int state_var;
+  19          };
+  20          
+  21          static void init(ElevatorController *t) {
+  22   1          t->goto_state_Stop(t);
+  23   1       }
+  24          
+  25          static void goto_state_Stop(ElevatorController *t) {
+  26   1         t->state_var = 1;
+  27   1         P0 = 0xF0;
+  28   1         g_delay(6000);
+  29   1          // 開門
+  30   1          // 客人進出
+  31   1          // 關們  
+  32   1       }  
+  33          
+  34          static void goto_state_Move(ElevatorController *t){
+  35   1          t->state_var = 2;
+  36   1              P0 = 0x0F;
+  37   1              g_delay(6000);
+  38   1          // 監視移動狀況  
+  39   1        }
+  40          static void move(ElevatorController *t) {
+  41   1        if(t->state_var == 1) 
+  42   1             t->goto_state_Move(t);
+  43   1        }
+  44          
+  45          static void stop(ElevatorController *t){
+  46   1        if( t->state_var == 2) 
+  47   1           t->goto_state_Stop(t);  }
+  48          
+  49          CTOR(ElevatorController)
+  50   1          FUNCTION_SETTING(init, init)
+  51   1              FUNCTION_SETTING(move, move)
+  52   1              FUNCTION_SETTING(stop, stop)
+  53   1              FUNCTION_SETTING(goto_state_Stop, goto_state_Stop)
+  54   1              FUNCTION_SETTING(goto_state_Move, goto_state_Move)
+  55   1      END_CTOR
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 09:59:46 PAGE 2   
+
+  56          
+  57          char xdata MemPool[1024];
+  58          
+  59          void main (void) {
+  60   1              ElevatorController *ele;
+  61   1              init_mempool(MemPool,sizeof(MemPool));
+  62   1          //---------------------------------------
+  63   1          ele = ElevatorControllerNew();
+  64   1              ele->init(ele);
+  65   1      
+  66   1              while(1) {
+  67   2             ele->move(ele);
+  68   2                 ele->stop(ele);
+  69   2               }
+  70   1      }
+  71                  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    444    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

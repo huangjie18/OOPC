@@ -1,0 +1,44 @@
+C51 COMPILER V8.01   APP                                                                   01/13/2008 18:04:53 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE APP
+OBJECT MODULE PLACED IN APP.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE APP.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX1-02  */
+   2          #include <REG51F.H>
+   3          #include <stdio.h>
+   4          
+   5          #define LW_OOPC_STATIC
+   6          #include "ex11-light.h"
+   7          
+   8          extern TLightSetting(TLight*);
+   9          
+  10          void main()  {
+  11   1            TLight light;
+  12   1            TLightSetting(&light);
+  13   1                
+  14   1                light.init(&light);
+  15   1                while(1) {
+  16   2                   light.run(&light);
+  17   2                       }
+  18   1      
+  19   1         }
+  20          
+  21                                             
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     41    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,71 @@
+### uVision2 Project, (C) Keil Software
+### Do not modify !
+
+ cExt (*.c)
+ aExt (*.a*; *.src)
+ oExt (*.obj)
+ lExt (*.lib)
+ tExt (*.txt)
+ pExt (*.plm)
+ CppX (*.cpp)
+ DaveTm { 0,0,0,0,0,0,0,0 }
+
+Target (Simulator), 0x0000 // Tools: 'MCS-51'
+Target (MCBx51: 8xC51Rx), 0x0000 // Tools: 'MCS-51'
+GRPOPT 1,(Source Group 1),1,0,0
+GRPOPT 2,(Documentation),1,0,0
+
+OPTFFF 1,1,1,754974723,0,1,11,0,<.\BLINKY.C><BLINKY.C> { 44,0,0,0,0,0,0,0,1,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,66,0,0,0,99,0,0,0,179,2,0,0,199,1,0,0 }
+OPTFFF 1,2,1,486539265,0,1,6,0,<.\EX29-light.c><EX29-light.c> { 44,0,0,0,0,0,0,0,1,0,0,0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,44,0,0,0,66,0,0,0,157,2,0,0,113,1,0,0 }
+OPTFFF 2,3,5,0,0,0,0,0,<.\ABSTRACT.TXT><ABSTRACT.TXT> 
+
+
+TARGOPT 1, (Simulator)
+ CLK51=33000000
+  OPTTT 1,1,1,0
+  OPTHX 0,65535,0,0,0
+  OPTLX 120,65,8,<.\>
+  OPTOX 16
+  OPTLT 1,1,1,0,1,1,0,1,0,0,0,0
+  OPTXL 1,1,1,1,1,1,1,0,0
+  OPTFL 1,0,1
+  OPTBL 0,(Data Sheet)<DATASHTS\PHILIPS\89C51Rx2.PDF>
+  OPTBL 1,(Add on databooks)<DATASHTS\ADDBOOKS.PDF>
+  OPTBL 2,(Programmer's Guide & Instruction Set Manual)<DATASHTS\PHILIPS\UPROGGUI.PDF>
+  OPTDL (S8051.DLL)()(DP51.DLL)(-p51R)(S8051.DLL)()(TP51.DLL)(-p51R)
+  OPTDBG 131581,0,()()()()()()()()()() (BIN\MON51.DLL)()()()
+  OPTKEY 0,(DLGDP51)((98=-1,-1,-1,-1,0)(82=640,308,838,415,1)(83=733,200,931,307,0)(84=340,262,538,369,0)(85=616,216,814,323,0)(99=-1,-1,-1,-1,0)(91=-1,-1,-1,-1,0)(92=-1,-1,-1,-1,0)(94=-1,-1,-1,-1,0)(95=-1,-1,-1,-1,0)(100=-1,-1,-1,-1,0))
+  OPTMM 1,0,(c:0x11b1)
+  OPTMM 2,0,(\measure\save_record)
+  OPTMM 3,0,(i:0)
+  OPTMM 4,0,(&y)
+  OPTDF 0x82
+  OPTLE <>
+  OPTLC <>
+EndOpt
+
+TARGOPT 2, (MCBx51: 8xC51Rx)
+ CLK51=33000000
+  OPTTT 1,1,1,0
+  OPTHX 0,65535,0,0,0
+  OPTLX 120,65,8,<.\>
+  OPTOX 16
+  OPTLT 1,1,1,0,1,1,0,1,0,0,0,0
+  OPTXL 1,1,1,1,1,1,1,0,0
+  OPTFL 1,0,0
+  OPTBL 0,(Data Sheet)<DATASHTS\PHILIPS\8XC52_54.PDF>
+  OPTBL 1,(Add on databooks)<DATASHTS\ADDBOOKS.PDF>
+  OPTBL 2,(Programmer's Guide & Instruction Set Manual)<DATASHTS\PHILIPS\UPROGGUI.PDF>
+  OPTDL (S8051.DLL)()(DP51.DLL)(-p51R)(S8051.DLL)()(TP51.DLL)(-p51R)
+  OPTDBG 1022,0,()()()()()()()()()() ()()()()
+  OPTKEY 0,(DLGTP51)((98=-1,-1,-1,-1,0)(82=-1,-1,-1,-1,0)(83=-1,-1,-1,-1,0)(84=-1,-1,-1,-1,0)(85=-1,-1,-1,-1,0)(99=-1,-1,-1,-1,0)(91=-1,-1,-1,-1,0)(92=-1,-1,-1,-1,0)(94=-1,-1,-1,-1,0)(95=-1,-1,-1,-1,0)(100=-1,-1,-1,-1,0))
+  OPTKEY 0,(MON51)(-S1 -B57600 -O15)
+  OPTMM 1,0,(c:0x11b1)
+  OPTMM 2,0,(\measure\save_record)
+  OPTMM 3,0,(y:0x87fff)
+  OPTMM 4,0,(Y:40700h)
+  OPTDF 0x84
+  OPTLE <>
+  OPTLC <>
+EndOpt
+

@@ -1,0 +1,54 @@
+C51 COMPILER V8.01   EX30_LIG                                                              05/19/2008 02:07:02 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX30_LIG
+OBJECT MODULE PLACED IN EX30-lig.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX30-lig.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX30-lig.c */
+   2          #include <REG52.H>
+   3          #include "EX30-lig.h"
+   4          
+   5          static void init( void *t )
+   6          {  
+   7   1      Light* cthis = (Light*) t;
+   8   1      cthis->state = 0;
+   9   1      } 
+  10          
+  11          static int get_state(void* t)
+  12          {  
+  13   1         Light* cthis = (Light*) t;
+  14   1      return cthis->state; 
+  15   1      }
+  16          
+  17          static void  set_light(void* t, int flag)
+  18          {
+  19   1       Light* cthis = (Light*) t;
+  20   1       cthis->state = flag;
+  21   1       if(cthis->state == 0)
+  22   1           P0 = 0x00;
+  23   1       else
+  24   1           P0 = 0x3c;
+  25   1      }
+  26          
+  27          CTOR(Light)
+  28   1        FUNCTION_SETTING(init, init);
+  29   1        FUNCTION_SETTING(get_state, get_state);
+  30   1        FUNCTION_SETTING(set_light, set_light);
+  31   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    135    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

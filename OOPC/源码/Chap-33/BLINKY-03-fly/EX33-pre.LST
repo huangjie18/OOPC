@@ -1,0 +1,48 @@
+C51 COMPILER V8.01   EX33_PRE                                                              05/19/2008 10:24:30 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_PRE
+OBJECT MODULE PLACED IN EX33-pre.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-pre.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-pre.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex33-ifs.h"
+   5          
+   6          CLASS(Preparing)
+   7          {
+   8             IMPLEMENTS(IFlyState);
+   9             STATE st;
+  10          };
+  11          
+  12          static void init(void *t){
+  13   1         Preparing *cthis = t;
+  14   1         cthis->st.state_code = 0x11;
+  15   1         }
+  16          
+  17          static void handle(IFlyState *t) {
+  18   1               Preparing *cthis = t;  
+  19   1               P0 = cthis->st.state_code;
+  20   1      }
+  21          
+  22          CTOR(Preparing)
+  23   1              FUNCTION_SETTING(IFlyState.init, init)
+  24   1              FUNCTION_SETTING(IFlyState.handle, handle)
+  25   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     92    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

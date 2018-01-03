@@ -1,0 +1,40 @@
+C51 COMPILER V8.01   EX33_MOVE                                                             05/19/2008 10:19:03 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_MOVE
+OBJECT MODULE PLACED IN EX33-move.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-move.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-move.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex33-evs.h"
+   5          
+   6          CLASS(Move)
+   7          {
+   8             IMPLEMENTS(IEvState);
+   9          };
+  10          
+  11          static void perform() {
+  12   1               P0 = 0xF0;
+  13   1      }
+  14          
+  15          CTOR(Move)
+  16   1              FUNCTION_SETTING(IEvState.perform, perform)
+  17   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

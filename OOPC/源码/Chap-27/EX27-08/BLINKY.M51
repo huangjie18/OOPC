@@ -1,0 +1,142 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/23/2008  22:57:15  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE BLINKY.obj TO BLINKY RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  BLINKY.obj (BLINKY)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ICALL)
+
+
+LINK MAP OF MODULE:  BLINKY (BLINKY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         _DATA_GROUP_
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0043H     UNIT         ?PR?RUN?BLINKY
+            CODE    0843H     0012H     UNIT         ?PR?DOING?BLINKY
+            CODE    0855H     000FH     UNIT         ?PR?MAIN?BLINKY
+            CODE    0864H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0870H     0006H     UNIT         ?C?LIB_CODE
+            CODE    0876H     0001H     UNIT         ?PR?WAIT?BLINKY
+
+
+
+OVERLAY MAP OF MODULE:   BLINKY (BLINKY)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?BLINKY
+
+?PR?MAIN?BLINKY                0008H    0003H
+  +--> ?PR?DOING?BLINKY
+
+?PR?DOING?BLINKY               000BH    0003H
+  +--> ?PR?RUN?BLINKY
+
+?PR?RUN?BLINKY                 -----    -----
+  +--> ?PR?WAIT?BLINKY
+
+
+
+SYMBOL TABLE OF MODULE:  BLINKY (BLINKY)
+
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/23/2008  22:57:15  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BLINKY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0843H         SYMBOL        doing
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:0855H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0876H         SYMBOL        wait
+  C:0800H         PUBLIC        run
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          WAIT
+  C:0876H         LINE#         6
+  C:0876H         LINE#         8
+  -------         ENDPROC       WAIT
+  -------         PROC          RUN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         15
+  C:0800H         LINE#         16
+  C:0800H         LINE#         19
+  C:0808H         LINE#         20
+  C:080AH         LINE#         21
+  C:080DH         LINE#         22
+  C:0810H         LINE#         23
+  C:081BH         LINE#         24
+  C:0821H         LINE#         26
+  C:0829H         LINE#         27
+  C:082BH         LINE#         28
+  C:082EH         LINE#         29
+  C:0831H         LINE#         30
+  C:083CH         LINE#         31
+  C:0842H         LINE#         32
+  -------         ENDPROC       RUN
+  -------         PROC          DOING
+  -------         DO            
+  D:000BH         SYMBOL        le
+  -------         ENDDO         
+  C:0843H         LINE#         40
+  C:0843H         LINE#         41
+  C:0843H         LINE#         43
+  C:084CH         LINE#         44
+  C:084CH         LINE#         45
+  C:0853H         LINE#         46
+  -------         ENDPROC       DOING
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        ctrl
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/23/2008  22:57:15  PAGE 3
+
+
+  -------         ENDDO         
+  C:0855H         LINE#         50
+  C:0855H         LINE#         52
+  C:0861H         LINE#         53
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BLINKY
+
+  -------         MODULE        ?C?ICALL
+  C:0870H         PUBLIC        ?C?ICALL
+  C:0874H         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0065H BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=15.0 xdata=0 code=122
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

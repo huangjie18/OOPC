@@ -13,22 +13,34 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\排序算法">
+      <UniqueIdentifier>{5a84ad6d-dec1-442f-bfbc-fce05e00366a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\查找算法">
+      <UniqueIdentifier>{e29217de-95c1-4405-b121-5936a356d21e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="顺序查找.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="拆半查找.c">
-      <Filter>源文件</Filter>
+    <ClCompile Include="选择排序.c">
+      <Filter>源文件\排序算法</Filter>
     </ClCompile>
     <ClCompile Include="分块查找.c">
-      <Filter>源文件</Filter>
+      <Filter>源文件\查找算法</Filter>
     </ClCompile>
     <ClCompile Include="哈希查找.c">
-      <Filter>源文件</Filter>
+      <Filter>源文件\查找算法</Filter>
+    </ClCompile>
+    <ClCompile Include="拆半查找.c">
+      <Filter>源文件\查找算法</Filter>
+    </ClCompile>
+    <ClCompile Include="顺序查找.c">
+      <Filter>源文件\查找算法</Filter>
+    </ClCompile>
+    <ClCompile Include="冒泡排序.c">
+      <Filter>源文件\排序算法</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

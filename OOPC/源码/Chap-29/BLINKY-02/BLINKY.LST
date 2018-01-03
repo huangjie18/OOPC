@@ -1,0 +1,38 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:32:59 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX29-ap-2.c (BLINKY.c) */
+   2          #define LW_OOPC_STATIC
+   3          #include "ex29-light.h"
+   4          
+   5          extern TLightSetting(TLight*);
+   6          
+   7          void main()  {
+   8   1            TLight light;
+   9   1            TLightSetting(&light);
+  10   1                
+  11   1                light.init(&light);
+  12   1                while(1) {
+  13   2                   light.run(&light);
+  14   2                       }
+  15   1         }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     41    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

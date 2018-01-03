@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_C_Code(Chap29-33)\Chap_29\BLINKY-01\BLINKY.uv2
+Project File Date:  05/17/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+compiling BLINKY.C...
+BLINKY.C(4): warning C318: can't open file 'ex29-light.h'
+BLINKY.C(6): error C141: syntax error near '*', expected ')'
+BLINKY.C(9): error C202: 'TLight': undefined identifier
+BLINKY.C(9): error C141: syntax error near 'light'
+BLINKY.C(10): error C202: 'light': undefined identifier
+BLINKY.C(12): error C202: 'light': undefined identifier
+BLINKY.C(14): error C202: 'light': undefined identifier
+Target not created
+Build target 'Simulator'
+compiling BLINKY.C...
+linking...
+Program Size: data=31.0 xdata=0 code=606
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

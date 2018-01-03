@@ -1,0 +1,58 @@
+C51 COMPILER V8.01   EX32_FACTORY                                                          05/19/2008 11:29:35 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_FACTORY
+OBJECT MODULE PLACED IN EX32-Factory.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-Factory.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-factory.c */
+   2          #include "lw_oopc_kc.h"
+   3          #include "ex32-led.h"
+   4          #include "ex32-factory.h"
+   5          
+   6          
+   7          extern void* LED_P0New();
+   8          extern void* LED_P1New();
+   9          extern void* LED_P2New();
+  10          
+  11          static void init(Factory *t) {
+  12   1          LED_P0* ps0;
+  13   1              LED_P1* ps1;
+  14   1              LED_P2* ps2;
+  15   1              ps0 = LED_P0New();
+  16   1              ps0->init(ps0);
+  17   1              t->head = (IL*)ps0;
+  18   1              
+  19   1              ps1 = LED_P1New();
+  20   1              ps1->init(ps1);
+  21   1              ps0->next = (IL*)ps1;
+  22   1      
+  23   1              ps2 = LED_P2New();
+  24   1              ps2->init(ps2);
+  25   1              ps1->next = (IL*)ps2;
+  26   1        }
+  27          
+  28          static IL* get_LED_LIST(Factory *t) {
+  29   1          return t->head;
+  30   1        }
+  31          
+  32          CTOR(Factory)
+  33   1        FUNCTION_SETTING(init, init)
+  34   1        FUNCTION_SETTING(get_LED_LIST, get_LED_LIST)
+  35   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    263    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      15
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

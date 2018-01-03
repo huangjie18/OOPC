@@ -1,0 +1,19 @@
+/* tc_ex04.c   */
+#include "stdio.h"
+#include "lw_oopc.h"
+#include "ctrl.h"
+
+extern void swDown();
+extern void swUp();
+void main()
+{
+    CTRL* ctrl = (CTRL*)CTRLNew();
+    ctrl->init(ctrl);
+    ctrl->turnOn(ctrl);
+    swDown();
+    ctrl->turnOff(ctrl);
+    swUp();
+    getchar();
+    return;
+}
+

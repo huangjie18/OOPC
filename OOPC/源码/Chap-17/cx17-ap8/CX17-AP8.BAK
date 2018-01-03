@@ -1,0 +1,79 @@
+/*  cx17-ap8.c   */
+#include "stdio.h"
+#include "malloc.h"
+
+#define CLASS(type)\
+typedef struct type type; \
+struct type
+
+#define CTOR(type) \
+void* type##New() \
+{ \
+ struct type *t; \
+ t = (struct type *)malloc(sizeof(struct type));
+
+#define FUNCTION_SETTING(f1, f2)  t->f1 = f2;
+#define END_CONS return (void*)t;  };
+#define INTERFACE(type) \
+typedef struct type type; \
+struct type
+#define IMPLEMENTS(type) \
+struct type type;
+
+/* ------------------------------------- */
+INTERFACE(IA)
+{
+    void (*init)(void*, double, double);
+    double (*cal_area)(void*);
+    double (*cal_perimeter)(void*);
+};
+/* ------------------------------------- */
+CLASS(Rectangle)
+{
+    IMPLEMENTS(IA);
+    double length;
+    double width;
+};
+
+void init_imp(void* t, double len, double wid)
+{
+   Rectangle* cthis = (Rectangle*)t;
+   cthis->length = len;
+   cthis->width = wid;
+}
+
+double cal_area_imp(void* t)
+{
+   Rectangle* cthis = (Rectangle*)t;
+   return cthis->length * cthis->width;
+}
+
+double cal_perimeter_imp(void* t)
+{
+   Rectangle* cthis = (Rectangle*)t;
+   return (cthis->length + cthis->width) * 2;
+}
+
+CTOR(Rectangle)
+   FUNCTION_SETTING(IA.init, init_imp)
+   FUNCTION_SETTING(IA.cal_area,cal_area_imp)
+   FUNCTION_SETTING(IA.cal_perimeter,cal_perimeter_imp)
+END_CTOR
+/*------------------------------------------*/
+int main()
+{
+   IA* pr;
+   pr = (IA*)RectangleNew();
+   pr->init(pr, 10.5, 20.5);
+
+   double v;
+   v = pr->cal_area(pr);
+   printf("area=%7.2f\n", v);
+
+   v = pr->cal_perimeter(pr);
+   printf("perimeter=%7.2f\n", v);
+
+   getchar();
+   return 0;
+}
+

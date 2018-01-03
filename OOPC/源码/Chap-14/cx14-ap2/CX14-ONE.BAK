@@ -1,0 +1,18 @@
+/*  c14-one.c  */
+#include <stdio.h>
+#include "cx14-con.h"
+
+CLASS(one_dollar)
+{
+    IMPLEMENTS(ICoin);
+    int k;
+};
+
+static double value()
+    {  return 1.0;   }
+
+CTOR(one_dollar)
+   FUNCTION_SETTING(ICon.init, init)
+   FUNCTION_SETTING(ICoin.value, value)
+END_CTOR
+

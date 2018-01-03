@@ -1,0 +1,85 @@
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 10:30:49 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_HANDLER
+OBJECT MODULE PLACED IN EX33-handler.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-handler.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-handler.c  */
+   2          #include <REG52.H>
+   3          #include "ex33-ifs.h"
+   4          #include "ex33-handler.h"
+   5           
+   6          static Handler *pL;
+   7          static long count;
+   8          static int max;
+   9          
+  10          void init_timer0() {
+  11   1        TMOD &= 0xF0;
+  12   1        TMOD |= 0x01;
+  13   1        TH0 = 0x00; 
+  14   1        TL0 = 0x00; 
+  15   1        ET0 = 1;
+  16   1        TR0 = 1;
+  17   1        EA = 1;
+  18   1        }
+  19          
+  20          void reload_timer0() {
+  21   1        TR0 = 0;
+  22   1        TH0 = 0x00; 
+  23   1        TL0 = 0x00; 
+  24   1        TR0 = 1;
+  25   1        }
+  26           
+  27          static void init(Handler *t){
+  28   1           t->fs = NULL;
+  29   1               pL = t;
+  30   1               max = 400;
+  31   1      }
+  32          
+  33          static void run(Handler *t) {
+  34   1          t->fs->handle(t->fs);
+  35   1      }
+  36          
+  37          static void call_back2() interrupt 1 {
+  38   1                      count++;
+  39   1                      if(count > max)  run(pL);
+  40   1                              reload_timer0();
+  41   1      }
+  42          
+  43          static void start() {
+  44   1          long i;
+  45   1          P0 = 0x00;
+  46   1              count = 0;
+  47   1              for(i=0; i<100000; i++) 
+  48   1                    ;  /* ÅýTimer0¸¨«áTimer1  */
+  49   1              init_timer0();
+  50   1         } 
+  51              
+  52          CTOR(Handler)
+  53   1              FUNCTION_SETTING(init, init)
+  54   1              FUNCTION_SETTING(start, start)
+  55   1      END_CTOR
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 10:30:49 PAGE 2   
+
+  56          
+  57          
+  58          
+  59          
+  60          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    369    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9      13
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

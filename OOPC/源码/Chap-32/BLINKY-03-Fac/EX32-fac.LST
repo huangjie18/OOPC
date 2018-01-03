@@ -1,0 +1,41 @@
+C51 COMPILER V8.01   EX32_FAC                                                              05/19/2008 11:22:09 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_FAC
+OBJECT MODULE PLACED IN EX32-fac.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-fac.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-fac.c */ 
+   2          #include "lw_oopc_kc.h"
+   3          #include "ex32-idisp.h"
+   4          #include "ex32-int.h"
+   5          #include "ex32-fac.h"
+   6          
+   7          extern void* IntegerNew();
+   8          
+   9          static IDisplay* get_object(){
+  10   1              IDisplay *pi;
+  11   1              pi = IntegerNew();
+  12   1              pi->init(pi);
+  13   1              return pi;
+  14   1      }
+  15          
+  16          CTOR(Factory)
+  17   1        FUNCTION_SETTING(get_object, get_object)
+  18   1      END_CTOR                
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     89    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

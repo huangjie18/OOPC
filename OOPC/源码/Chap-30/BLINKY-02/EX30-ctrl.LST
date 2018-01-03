@@ -1,0 +1,112 @@
+C51 COMPILER V8.01   EX30_CTRL                                                             05/19/2008 10:45:18 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX30_CTRL
+OBJECT MODULE PLACED IN EX30-ctrl.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX30-ctrl.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX30-ctrl.c  */
+   2          #include <REG51F.H>
+   3          #include <stdio.h>
+   4          
+   5          #define LW_OOPC_STATIC
+   6          #include "ex30-ctrl.h"
+   7          
+   8          
+   9          extern LightRSetting(LightR*);
+  10          extern LightLSetting(LightL*);
+  11          
+  12          void g_timer_delay() {
+  13   1         TMOD &= 0xF0;
+  14   1         TMOD |= 0x01;
+  15   1         ET0 = 0;
+  16   1         TH0 = 0x3C;
+  17   1         TL0 = 0xB0;
+  18   1         TF0 = 0;
+  19   1         TR0 = 1;
+  20   1         while(TF0 == 0);
+  21   1         TR0 = 0;
+  22   1      }
+  23          
+  24          void g_delay(unsigned int sec) {
+  25   1         int i, j;
+  26   1         for(i=0; i<sec; i++)
+  27   1            for(j=0; j<20; j++)
+  28   1               g_timer_delay();
+  29   1      }
+  30                                                  
+  31          static void init(CTRL* t) {
+  32   1          LightR *pr; LightL *pl;
+  33   1              pr = &(t->lg_right);
+  34   1              pl = &(t->lg_left);
+  35   1      
+  36   1              LightRSetting(pr);   
+  37   1              LightLSetting(pl);
+  38   1         
+  39   1          t->state = 'L'; 
+  40   1              pr->init('Y', pr);
+  41   1              pl->init('R', pl); 
+  42   1              }
+  43          
+  44          static void run(CTRL* t) {
+  45   1           while(1) {
+  46   2            switch(t->state) {
+  47   3                case 'L':
+  48   3                     t->goto_SW(t);
+  49   3                         break;
+  50   3                case 'S':
+  51   3                     t->goto_LW(t);
+  52   3                         break;
+  53   3           }
+  54   2         }
+  55   1      }
+C51 COMPILER V8.01   EX30_CTRL                                                             05/19/2008 10:45:18 PAGE 2   
+
+  56          
+  57          static void goto_LW(CTRL *t) {
+  58   1                 LightR *pr; LightL *pl;
+  59   1                 t->state = 'L';
+  60   1                 pr = &(t->lg_right);
+  61   1                 pl = &(t->lg_left);
+  62   1      
+  63   1               
+  64   1              
+  65   1                g_delay(3);
+  66   1                pr->ev_Y(pr);
+  67   1                pl->ev_Y(pl);
+  68   1          } 
+  69          static void goto_SW(CTRL *t) {
+  70   1          LightR *pr; LightL *pl;
+  71   1              t->state = 'S';
+  72   1              pr = &(t->lg_right);
+  73   1          pl = &(t->lg_left);
+  74   1               
+  75   1              g_delay(1);
+  76   1              pr->ev_RG(pr);
+  77   1              pl->ev_RG(pl);
+  78   1          } 
+  79                  
+  80          CTOR(CTRL)
+  81   1        FUNCTION_SETTING(init, init)
+  82   1        FUNCTION_SETTING(run, run)
+  83   1        FUNCTION_SETTING(goto_LW, goto_LW)
+  84   1        FUNCTION_SETTING(goto_SW, goto_SW)
+  85   1      END_CTOR
+  86          
+  87                                             
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    603    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      33
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

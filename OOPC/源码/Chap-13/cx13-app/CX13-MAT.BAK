@@ -1,0 +1,97 @@
+/* cx13-mat.c  */
+/*             */
+#include <stdio.h>
+#include "cx13-mat.h"
+
+static void initialize(void* t)
+  {
+  Matrix* cthis = (Matrix*)t;
+  cthis->m = 0;
+  cthis->n = 0;
+  }
+
+static void init_fii(void* t, float* from, int row, int col )
+	{       Vector* pv;  int i;
+		    Matrix* cthis = (Matrix*)t;
+			cthis->m = row+1;
+			cthis->n = row+col+1;
+			cthis->p = (Vector**)malloc(cthis->m * sizeof(Vector*));
+
+
+	    for( i=0; i<cthis->m; i++, from += cthis->n )
+			   {  pv = (Vector*)VectorNew();
+			      pv->init_fi(pv, from, cthis->n);
+		    	  cthis->p[i] = pv;
+  				}
+          }
+
+static void destroy(void* t)
+  {       int i; Vector*pv;
+	  Matrix* cthis = (Matrix*)t;
+	  if(cthis->m)
+	  {
+	  for( i=0; i<cthis->m; i++)
+	    { pv = cthis->p[i];
+	      pv->destroy(pv);
+	    }
+	  free(cthis->p);
+	  }
+  }
+
+static void setRow(void* t, Vector* from, int row)
+      {
+          Matrix* cthis = (Matrix*)t;
+		  Vector* pv;
+		  pv = cthis->p[row];
+		  pv->assign(pv, from);
+      }
+
+static Vector* row(void* t, int i)
+       {
+		   Matrix* cthis = (Matrix*)t;
+		   return cthis->p[i];
+       }
+
+static Vector* col(void* t, int i)
+       {
+		  int k;  Vector* pv2;
+		  Matrix* cthis = (Matrix*)t;
+		  Vector* pv = (Vector*)VectorNew();
+		  pv->init_i(pv, cthis->m);
+
+		  for(k=0; k<cthis->m; k++)
+		  {
+              pv2 = cthis->p[k];
+			  *pv->get(pv,k) = pv2->get_val(pv2,i);
+		  }
+          return pv;
+		 }
+
+static void assign(void* t, Matrix* px)
+    {
+	Vector *pv, *pv2;  int i;
+	Matrix* cthis = (Matrix*)t;
+	    cthis->m = px->m;
+		cthis->n = px->n;
+		cthis->p = (Vector**)malloc(cthis->m * sizeof(Vector*));
+
+        for( i=0; i<cthis->m; i++)
+		{
+	    /* pv = cthis->p[i];  */
+			pv2 = px->row(px, i);
+			pv = (Vector*)VectorNew();
+            pv->init(pv);
+			pv->assign(pv, pv2);
+			cthis->p[i] = pv;
+		}
+    }
+
+CTOR(Matrix)
+	FUNCTION_SETTING(initialize, initialize);
+        FUNCTION_SETTING(init_fii, init_fii);
+	FUNCTION_SETTING(destroy, destroy);
+        FUNCTION_SETTING(setRow, setRow);
+        FUNCTION_SETTING(row, row);
+        FUNCTION_SETTING(col, col);
+	FUNCTION_SETTING(assign, assign);
+END_CTOR

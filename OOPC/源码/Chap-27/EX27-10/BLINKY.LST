@@ -1,0 +1,85 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 22:59:58 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-10.C (BLINKY.C)  */
+   2          #include <REG51F.H>
+   3          #include "lw_oopc_kc.h"
+   4          /*  定義LED類別  */
+   5          CLASS(LED)
+   6          {
+   7             void (*run)();     /*  定義LED類別裡的函數  */
+   8          };
+   9          
+  10          void wait (void)  {              
+  11   1             ;                              
+  12   1           }
+  13          
+  14          /*  實作LED類別裡的run()函數  */
+  15          static void run(){
+  16   1           unsigned int i;   unsigned char j;      
+  17   1           for (j=0x01; j< 0x80; j<<=1)  {   
+  18   2             P1 = j;                         
+  19   2             for (i = 0; i < 10000; i++)  {  
+  20   3                 wait ();                      
+  21   3             }
+  22   2          }
+  23   1          for (j=0x80; j> 0x01; j>>=1)  {  
+  24   2            P1 = j;                         
+  25   2            for (i = 0; i < 10000; i++)  { 
+  26   3             wait ();                      
+  27   3            }    
+  28   2          }
+  29   1      }
+  30          
+  31          /*   LED 類別的建構式  */
+  32          CTOR(LED)
+  33   1         FUNCTION_SETTING(run, run)
+  34   1      END_CTOR
+  35          /* ------------------------------------ */
+  36          CLASS(Controller)
+  37          {
+  38              void (*doing)();
+  39          };
+  40          
+  41          static void doing()
+  42          {
+  43   1              LED *pl = LEDNew();
+  44   1           while (1) {  
+  45   2                 pl->run();
+  46   2              }
+  47   1      }
+  48          
+  49          CTOR(Controller)
+  50   1         FUNCTION_SETTING(doing, doing);
+  51   1      END_CTOR
+  52          /* ------------------------------------ */
+  53          /*        主函數           */
+  54          char xdata MemPool[1024];
+  55          void main (void)  {
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 22:59:58 PAGE 2   
+
+  56   1          Controller *pc;             /*  宣告LED型態的指標  */
+  57   1          init_mempool(MemPool,sizeof(MemPool));
+  58   1          pc = ControllerNew();  
+  59   1          pc->doing();           /*  呼叫該物件的run()函數  */
+  60   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    213    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,50 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 18:16:42 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-01.C   */
+   2          /* BLINKY.C - LED Flasher for the Keil MCBx51 Evaluation Board with 80C51 device*/
+   3          #include <REG51F.H>
+   4          void wait (void)  {                   /* wait function */
+   5   1        ;                                /* only to delay for LED flashes */
+   6   1      }
+   7          
+   8          void main (void)  {
+   9   1        unsigned int i;                     /* Delay var */
+  10   1        unsigned char j;                    /* LED var */
+  11   1      
+  12   1        while (1) {                        /* Loop forever */
+  13   2          for (j=0x01; j< 0x80; j<<=1)  {     /* Blink LED 0, 1, 2, 3, 4, 5, 6 */
+  14   3            P1 = j;                        /* Output to LED Port */
+  15   3            for (i = 0; i < 10000; i++)  {      /* Delay for 10000 Counts */
+  16   4             wait ();                       /* call wait function */
+  17   4            }
+  18   3          }
+  19   2      
+  20   2          for (j=0x80; j> 0x01; j>>=1)  {      /* Blink LED 6, 5, 4, 3, 2, 1 */
+  21   3            P1 = j;                         /* Output to LED Port */
+  22   3            for (i = 0; i < 10000; i++)  {       /* Delay for 10000 Counts */
+  23   4             wait ();                        /* call wait function */
+  24   4            }    
+  25   3          }
+  26   2        }
+  27   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     67    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,389 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        05/19/2008  11:39:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE BLINKY.obj, EX32-ctrl.obj, EX32-Factory.obj, EX32-LED.obj TO BLINKY RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  BLINKY.obj (BLINKY)
+  EX32-ctrl.obj (EX32_CTRL)
+  EX32-Factory.obj (EX32_FACTORY)
+  EX32-LED.obj (EX32_LED)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ICALL)
+  C:\KEIL\C51\LIB\C51S.LIB (MALLOC)
+  C:\KEIL\C51\LIB\C51S.LIB (INIT_MEM)
+  C:\KEIL\C51\LIB\C51S.LIB (FREE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?IILDX)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTIDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDXDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTXDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDPDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PSTPDATA)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?PLDCODE)
+
+
+LINK MAP OF MODULE:  BLINKY (BLINKY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0013H     UNIT         _DATA_GROUP_
+            IDATA   001BH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0400H     UNIT         ?XD?BLINKY
+            XDATA   0400H     0008H     UNIT         ?XD?INIT_MEM
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0156H     UNIT         ?C?LIB_CODE
+            CODE    0956H     0103H     UNIT         ?PR?_FREE?FREE
+            CODE    0A59H     009CH     UNIT         ?PR?_MALLOC?MALLOC
+            CODE    0AF5H     008EH     UNIT         ?PR?_INIT?EX32_FACTORY
+            CODE    0B83H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0C0FH     0069H     UNIT         ?PR?MAIN?BLINKY
+            CODE    0C78H     0052H     UNIT         ?PR?_FACTORYSETTING?EX32_FACTORY
+            CODE    0CCAH     003CH     UNIT         ?PR?_INIT_MEMPOOL?INIT_MEM
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 2
+
+
+            CODE    0D06H     0032H     UNIT         ?PR?_SEND?EX32_CTRL
+            CODE    0D38H     0026H     UNIT         ?PR?_DESTROY?EX32_FACTORY
+            CODE    0D5EH     0022H     UNIT         ?PR?_CTRLSETTING?EX32_CTRL
+            CODE    0D80H     0022H     UNIT         ?PR?_LED_P0SETTING?EX32_LED
+            CODE    0DA2H     0022H     UNIT         ?PR?_LED_P1SETTING?EX32_LED
+            CODE    0DC4H     0011H     UNIT         ?PR?CTRLNEW?EX32_CTRL
+            CODE    0DD5H     0011H     UNIT         ?PR?FACTORYNEW?EX32_FACTORY
+            CODE    0DE6H     0011H     UNIT         ?PR?LED_P0NEW?EX32_LED
+            CODE    0DF7H     0011H     UNIT         ?PR?LED_P1NEW?EX32_LED
+            CODE    0E08H     000CH     UNIT         ?C_INITSEG
+            CODE    0E14H     0007H     UNIT         ?PR?_GET_CTRL?EX32_FACTORY
+            CODE    0E1BH     0003H     UNIT         ?PR?_SEND?EX32_LED
+            CODE    0E1EH     0003H     UNIT         ?PR?_SEND2?EX32_LED
+
+
+
+OVERLAY MAP OF MODULE:   BLINKY (BLINKY)
+
+
+SEGMENT                                    DATA_GROUP 
+  +--> CALLED SEGMENT                    START    LENGTH
+--------------------------------------------------------
+?C_C51STARTUP                            -----    -----
+  +--> ?PR?MAIN?BLINKY
+  +--> ?C_INITSEG
+
+?PR?MAIN?BLINKY                          0008H    0006H
+  +--> ?PR?_INIT_MEMPOOL?INIT_MEM
+  +--> ?PR?FACTORYNEW?EX32_FACTORY
+
+?PR?FACTORYNEW?EX32_FACTORY              -----    -----
+  +--> ?PR?_MALLOC?MALLOC
+  +--> ?PR?_FACTORYSETTING?EX32_FACTORY
+
+?PR?_MALLOC?MALLOC                       0014H    0004H
+
+?PR?_FACTORYSETTING?EX32_FACTORY         000EH    0003H
+  +--> ?PR?_INIT?EX32_FACTORY
+  +--> ?PR?_GET_CTRL?EX32_FACTORY
+  +--> ?PR?_DESTROY?EX32_FACTORY
+
+?PR?_INIT?EX32_FACTORY                   0011H    0003H
+  +--> ?PR?CTRLNEW?EX32_CTRL
+  +--> ?PR?LED_P0NEW?EX32_LED
+  +--> ?PR?LED_P1NEW?EX32_LED
+
+?PR?CTRLNEW?EX32_CTRL                    -----    -----
+  +--> ?PR?_MALLOC?MALLOC
+  +--> ?PR?_CTRLSETTING?EX32_CTRL
+
+?PR?_CTRLSETTING?EX32_CTRL               0014H    0003H
+  +--> ?PR?_SEND?EX32_CTRL
+
+?PR?_SEND?EX32_CTRL                      0017H    0004H
+
+?PR?LED_P0NEW?EX32_LED                   -----    -----
+  +--> ?PR?_MALLOC?MALLOC
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 3
+
+
+  +--> ?PR?_LED_P0SETTING?EX32_LED
+
+?PR?_LED_P0SETTING?EX32_LED              0014H    0003H
+  +--> ?PR?_SEND?EX32_LED
+
+?PR?LED_P1NEW?EX32_LED                   -----    -----
+  +--> ?PR?_MALLOC?MALLOC
+  +--> ?PR?_LED_P1SETTING?EX32_LED
+
+?PR?_LED_P1SETTING?EX32_LED              0014H    0003H
+  +--> ?PR?_SEND2?EX32_LED
+
+?PR?_DESTROY?EX32_FACTORY                0011H    0003H
+  +--> ?PR?_FREE?FREE
+
+?PR?_FREE?FREE                           0014H    0004H
+
+
+
+SYMBOL TABLE OF MODULE:  BLINKY (BLINKY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        BLINKY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0C0FH         PUBLIC        main
+  X:0000H         PUBLIC        MemPool
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        fa
+  D:000BH         SYMBOL        ctrl
+  -------         ENDDO         
+  C:0C0FH         LINE#         11
+  C:0C0FH         LINE#         13
+  C:0C1AH         LINE#         14
+  C:0C23H         LINE#         15
+  C:0C39H         LINE#         17
+  C:0C5EH         LINE#         18
+  C:0C76H         LINE#         20
+  C:0C76H         LINE#         22
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        BLINKY
+
+  -------         MODULE        EX32_CTRL
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:0D06H         SYMBOL        _send
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0DC4H         PUBLIC        CTRLNew
+  D:00C8H         PUBLIC        T2CON
+  C:0D5EH         PUBLIC        _CTRLSetting
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 4
+
+
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _SEND
+  D:0017H         SYMBOL        t
+  D:001AH         SYMBOL        hx
+  C:0D06H         LINE#         6
+  C:0D0EH         LINE#         7
+  C:0D0EH         LINE#         8
+  C:0D20H         LINE#         9
+  -------         ENDPROC       _SEND
+  -------         PROC          CTRLNEW
+  -------         DO            
+  D:0001H         SYMBOL        t
+  -------         ENDDO         
+  C:0DC4H         LINE#         12
+  -------         ENDPROC       CTRLNEW
+  -------         PROC          _CTRLSETTING
+  D:0014H         SYMBOL        t
+  C:0D5EH         LINE#         12
+  C:0D64H         LINE#         13
+  C:0D79H         LINE#         14
+  -------         ENDPROC       _CTRLSETTING
+  -------         ENDMOD        EX32_CTRL
+
+  -------         MODULE        EX32_FACTORY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0DD5H         PUBLIC        FactoryNew
+  C:0AF5H         SYMBOL        _init
+  C:0C78H         PUBLIC        _FactorySetting
+  C:0E14H         SYMBOL        _get_CTRL
+  C:0D38H         SYMBOL        _destroy
+  -------         PROC          _INIT
+  D:0011H         SYMBOL        t
+  C:0AF5H         LINE#         10
+  C:0AFBH         LINE#         11
+  C:0B10H         LINE#         12
+  C:0B25H         LINE#         13
+  C:0B3AH         LINE#         14
+  C:0B5EH         LINE#         15
+  C:0B82H         LINE#         16
+  -------         ENDPROC       _INIT
+  -------         PROC          _GET_CTRL
+  D:0001H         SYMBOL        t
+  C:0E14H         LINE#         18
+  C:0E14H         LINE#         19
+  C:0E1AH         LINE#         20
+  -------         ENDPROC       _GET_CTRL
+  -------         PROC          _DESTROY
+  D:0011H         SYMBOL        t
+  C:0D38H         LINE#         22
+  C:0D3EH         LINE#         23
+  C:0D4BH         LINE#         24
+  -------         ENDPROC       _DESTROY
+  -------         PROC          FACTORYNEW
+  -------         DO            
+  D:0001H         SYMBOL        t
+  -------         ENDDO         
+  C:0DD5H         LINE#         27
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 5
+
+
+  -------         ENDPROC       FACTORYNEW
+  -------         PROC          _FACTORYSETTING
+  D:000EH         SYMBOL        t
+  C:0C78H         LINE#         27
+  C:0C7EH         LINE#         28
+  C:0C93H         LINE#         29
+  C:0CABH         LINE#         30
+  C:0CC3H         LINE#         31
+  -------         ENDPROC       _FACTORYSETTING
+  -------         ENDMOD        EX32_FACTORY
+
+  -------         MODULE        EX32_LED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:0E1BH         SYMBOL        _send
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0E1EH         SYMBOL        _send2
+  C:0DE6H         PUBLIC        LED_P0New
+  C:0DF7H         PUBLIC        LED_P1New
+  D:00C8H         PUBLIC        T2CON
+  C:0D80H         PUBLIC        _LED_P0Setting
+  C:0DA2H         PUBLIC        _LED_P1Setting
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _SEND
+  D:0007H         SYMBOL        hx
+  C:0E1BH         LINE#         6
+  C:0E1BH         LINE#         7
+  C:0E1DH         LINE#         8
+  -------         ENDPROC       _SEND
+  -------         PROC          LED_P0NEW
+  -------         DO            
+  D:0001H         SYMBOL        t
+  -------         ENDDO         
+  C:0DE6H         LINE#         10
+  -------         ENDPROC       LED_P0NEW
+  -------         PROC          _LED_P0SETTING
+  D:0014H         SYMBOL        t
+  C:0D80H         LINE#         10
+  C:0D86H         LINE#         11
+  C:0D9BH         LINE#         12
+  -------         ENDPROC       _LED_P0SETTING
+  -------         PROC          _SEND2
+  D:0007H         SYMBOL        hx
+  C:0E1EH         LINE#         15
+  C:0E1EH         LINE#         16
+  C:0E20H         LINE#         17
+  -------         ENDPROC       _SEND2
+  -------         PROC          LED_P1NEW
+  -------         DO            
+  D:0001H         SYMBOL        t
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 6
+
+
+  C:0DF7H         LINE#         19
+  -------         ENDPROC       LED_P1NEW
+  -------         PROC          _LED_P1SETTING
+  D:0014H         SYMBOL        t
+  C:0DA2H         LINE#         19
+  C:0DA8H         LINE#         20
+  C:0DBDH         LINE#         21
+  -------         ENDPROC       _LED_P1SETTING
+  -------         ENDMOD        EX32_LED
+
+  -------         MODULE        ?C?PLDPTR
+  C:0800H         PUBLIC        ?C?PLDPTR
+  -------         ENDMOD        ?C?PLDPTR
+
+  -------         MODULE        ?C?PSTPTR
+  C:0820H         PUBLIC        ?C?PSTPTR
+  -------         ENDMOD        ?C?PSTPTR
+
+  -------         MODULE        ?C?PLDOPTR
+  C:086FH         PUBLIC        ?C?PLDOPTR
+  -------         ENDMOD        ?C?PLDOPTR
+
+  -------         MODULE        ?C?PSTOPTR
+  C:089FH         PUBLIC        ?C?PSTOPTR
+  -------         ENDMOD        ?C?PSTOPTR
+
+  -------         MODULE        ?C?ICALL
+  C:08F8H         PUBLIC        ?C?ICALL
+  C:08FCH         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        MALLOC
+  C:0A59H         PUBLIC        _malloc
+  -------         ENDMOD        MALLOC
+
+  -------         MODULE        INIT_MEM
+  X:0400H         PUBLIC        __mem_avail__
+  C:0CCAH         PUBLIC        _init_mempool
+  -------         ENDMOD        INIT_MEM
+
+  -------         MODULE        FREE
+  C:0956H         PUBLIC        _free
+  -------         ENDMOD        FREE
+
+  -------         MODULE        ?C?IILDX
+  C:08FEH         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+  -------         MODULE        ?C?PLDIDATA
+  C:0914H         PUBLIC        ?C?PLDIDATA
+  -------         ENDMOD        ?C?PLDIDATA
+
+  -------         MODULE        ?C?PSTIDATA
+  C:091DH         PUBLIC        ?C?PSTIDATA
+  -------         ENDMOD        ?C?PSTIDATA
+
+  -------         MODULE        ?C?PLDXDATA
+BL51 BANKED LINKER/LOCATER V6.00                                                      05/19/2008  11:39:36  PAGE 7
+
+
+  C:0926H         PUBLIC        ?C?PLDXDATA
+  -------         ENDMOD        ?C?PLDXDATA
+
+  -------         MODULE        ?C?PSTXDATA
+  C:092FH         PUBLIC        ?C?PSTXDATA
+  -------         ENDMOD        ?C?PSTXDATA
+
+  -------         MODULE        ?C?PLDPDATA
+  C:0938H         PUBLIC        ?C?PLDPDATA
+  -------         ENDMOD        ?C?PLDPDATA
+
+  -------         MODULE        ?C?PSTPDATA
+  C:0941H         PUBLIC        ?C?PSTPDATA
+  -------         ENDMOD        ?C?PSTPDATA
+
+  -------         MODULE        ?C?PLDCODE
+  C:094AH         PUBLIC        ?C?PLDCODE
+  -------         ENDMOD        ?C?PLDCODE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0258H BYTE (29%) *
+******************************************************************************
+
+Program Size: data=28.0 xdata=1032 code=1572
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,73 @@
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 22:58:57 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX01-09.C (BLINKY.C) */
+   2          #include <REG51F.H>
+   3          #include "lw_oopc_kc.h"
+   4          /*  定義LED類別  */
+   5          CLASS(LED)
+   6          {
+   7             void (*run)();     /*  定義LED類別裡的函數  */
+   8          };
+   9          
+  10          void wait (void)  {              
+  11   1             ;                              
+  12   1           }
+  13          
+  14          /*  實作LED類別裡的run()函數  */
+  15          static void run(){
+  16   1           unsigned int i;              
+  17   1           unsigned char j;      
+  18   1               
+  19   1               for (j=0x01; j< 0x80; j<<=1)  {   
+  20   2            P1 = j;                         
+  21   2            for (i = 0; i < 10000; i++)  {  
+  22   3             wait ();                      
+  23   3            }
+  24   2          }
+  25   1          for (j=0x80; j> 0x01; j>>=1)  {  
+  26   2            P1 = j;                         
+  27   2            for (i = 0; i < 10000; i++)  { 
+  28   3             wait ();                      
+  29   3            }    
+  30   2          }
+  31   1      }
+  32          
+  33          /*   LED 類別的建構式  */
+  34          CTOR(LED)
+  35   1         FUNCTION_SETTING(run, run)
+  36   1      END_CTOR
+  37          
+  38          /*   主函數            */
+  39          char xdata MemPool[1024];
+  40          void main (void)  {
+  41   1          LED *pe;         /*  宣告LED型態的指標  */
+  42   1      init_mempool(MemPool,sizeof(MemPool));
+  43   1          pe = LEDNew();  /*  呼叫建構式LEDNew()來誕生LED類別的物件，
+  44   1                                   並且令pe指向該物件  */
+  45   1          while (1) {                       
+  46   2             pe->run();    /*  呼叫該物件的run()函數  */
+  47   2          }
+  48   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    153    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V8.01   BLINKY                                                                05/23/2008 22:58:57 PAGE 2   
+
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,4 @@
+#include "toolbar_one.rh"
+
+IDB_TOOLBITMAP BITMAP "toolbuttons.bmp"
+

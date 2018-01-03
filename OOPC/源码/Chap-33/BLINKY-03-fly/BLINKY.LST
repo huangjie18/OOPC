@@ -1,0 +1,46 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:41:01 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-ap-3.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex33-ifs.h"
+   5          #include "ex33-handler.h"
+   6          
+   7          extern void* HandlerNew();
+   8          extern void* FlyingNew();
+   9          char xdata MemPool[1024];
+  10          
+  11          void main (void)
+  12          {
+  13   1         Handler *hnd;
+  14   1         init_mempool(MemPool,sizeof(MemPool));
+  15   1         //---------------------------------------
+  16   1         hnd = HandlerNew();
+  17   1         hnd->init(hnd);
+  18   1               
+  19   1         while(1) {
+  20   2             hnd->run(hnd);
+  21   2               }
+  22   1      }
+  23           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     75    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

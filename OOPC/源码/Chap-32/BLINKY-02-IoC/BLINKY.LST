@@ -1,0 +1,65 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:37:55 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-ap-2.c  */
+   2          #include <REG52.H>
+   3          #include <stdio.h>
+   4          #include "lw_oopc_kc.h" 
+   5          #include "ex32-idisp.h"
+   6          #include "ex32-int.h"
+   7          
+   8          extern void* IntegerNew();
+   9          
+  10          CLASS(Document)
+  11             {
+  12                void (*init)(Document *t);
+  13                    void (*display)(Document *t);
+  14                IDisplay *pi;
+  15             };
+  16          
+  17          static void init(Document *t)
+  18             {  t->pi = IntegerNew(); 
+  19   1            t->pi->init(t->pi);   }
+  20          
+  21          static void display(Document *t)
+  22             {  t->pi->display(t->pi); }
+  23          
+  24          CTOR(Document)
+  25   1          FUNCTION_SETTING(init, init);
+  26   1              FUNCTION_SETTING(display, display);
+  27   1      END_CTOR
+  28          
+  29          /* ----------------------------------- */
+  30          char xdata MemPool[1024];
+  31          
+  32          void main() {
+  33   1      Document *pdoc;
+  34   1      
+  35   1      init_mempool(MemPool,sizeof(MemPool));
+  36   1      pdoc = DocumentNew();
+  37   1      pdoc->init(pdoc);
+  38   1      pdoc->display(pdoc); 
+  39   1      while(1) {
+  40   2                 ;
+  41   2              }
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    272    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

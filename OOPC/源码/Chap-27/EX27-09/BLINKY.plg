@@ -1,0 +1,17 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_old\EX01-09\BLINKY.uv2
+Project File Date:  05/17/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+compiling BLINKY.C...
+linking...
+Program Size: data=16.0 xdata=1032 code=707
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

@@ -1,0 +1,50 @@
+C51 COMPILER V8.01   EX33_FLY                                                              05/19/2008 10:24:30 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_FLY
+OBJECT MODULE PLACED IN EX33-Fly.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-Fly.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-fly.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex33-ifs.h"
+   5          
+   6          CLASS(Flying)
+   7          {                  
+   8             IMPLEMENTS(IFlyState);
+   9             STATE st;
+  10          };
+  11          
+  12          static void init(void *t){
+  13   1         Flying *cthis = t;
+  14   1         cthis->st.state_code = 0x77;
+  15   1         cthis->st.position_x = 2;
+  16   1         cthis->st.position_y = 2;
+  17   1        }
+  18          
+  19          static void handle(IFlyState *t) {
+  20   1               Flying *cthis = t;     
+  21   1               P0 = cthis->st.state_code;
+  22   1      }
+  23          
+  24          CTOR(Flying)
+  25   1              FUNCTION_SETTING(IFlyState.init, init)
+  26   1              FUNCTION_SETTING(IFlyState.handle, handle)
+  27   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    112    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,49 @@
+C51 COMPILER V8.01   EX17_CTRL                                                             01/18/2008 19:25:37 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX17_CTRL
+OBJECT MODULE PLACED IN EX17-ctrl.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX17-ctrl.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX18-ctrl.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex18-ifs.h"
+*** WARNING C318 IN LINE 4 OF EX17-ctrl.c: can't open file 'ex18-ifs.h'
+   5          #include "ex18-ctrl.h"
+*** WARNING C318 IN LINE 5 OF EX17-ctrl.c: can't open file 'ex18-ctrl.h'
+   6          
+   7          extern void* HandlerNew();
+   8          extern void* LandingNew();
+   9          extern void* FlyingNew();
+  10          extern void* PreparingNew();
+  11          extern void* TakingOffNew();
+  12          
+  13          static CTRL *cthis;
+*** ERROR C129 IN LINE 13 OF EX17-CTRL.C: missing ';' before '*'
+  14          static int n;
+  15          
+  16          static void init(CTRL *t){
+  17          
+  18              t->hnd = HandlerNew();
+  19                  t->array[1] = PreparingNew();
+  20                  t->array[2] = TakingOffNew();
+  21                  t->array[3] = FlyingNew();
+  22                  t->array[4] = LandingNew();
+  23                  cthis = t; 
+  24                  n = 0;
+  25          }
+  26          
+  27          CTOR(CTRL)
+  28          END_CTOR
+  29          int k=0;
+  30          
+  31          static void run() {
+  32             cthis->hnd->st_obj = cthis->array[n];
+  33                  n++;
+  34                  if(n >= 4) n=0;  
+  35          }
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)

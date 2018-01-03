@@ -1,0 +1,5 @@
+"BLINKY.obj",
+"EX30-lig.obj",
+"EX30-sw.obj" 
+TO "BLINKY" 
+RAMSIZE(256) 

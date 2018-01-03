@@ -1,0 +1,24 @@
+/*  cx14-ap3.c  */
+#include <stdio.h>
+#include "lw_oopc.h"
+#include "cx14-all.h"
+
+void main()
+{
+   double a;
+   IALL* pa;
+   IB* pb;
+   IC* pc;
+   pb = (IB*)RectNew();
+   pb->init(pb, 10.0, 10.0);
+   a = pb->cal_area(pb);
+  /* printf("area = %7.2f\n", a);  */
+
+   pa = (IALL*)pb;
+   pc = &(pa->IB);
+   /* pc->init(pc, 7.0, 34.0);  */
+   a = pc->cal_perimeter(pa);
+   printf("s = %7.2f\n", a);
+   getchar();
+}
+

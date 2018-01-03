@@ -1,0 +1,4 @@
+"BLINKY.obj",
+"ex32-int.obj" 
+TO "BLINKY" 
+RAMSIZE(256) 

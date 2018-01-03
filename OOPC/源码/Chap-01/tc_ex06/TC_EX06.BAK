@@ -1,0 +1,35 @@
+/* tc_ex06.c   */
+#include "stdio.h"
+#include "lw_oopc.h"
+#include "ctrl.h"
+#include "switch.h"
+
+struct Circle{
+   float radius;
+   };
+
+void init(struct Circle *t){
+	t->radius = 10.0;
+}
+void cal_area(struct Circle *t) {
+	printf("Area = %f\n", 3.14 * t->radius * t->radius);
+}
+
+void main()
+{
+    CTRL* ctrl = (CTRL*)CTRLNew();
+    DoorSwitch *psw = (DoorSwitch*)DoorSwitchNew();
+    struct Circle cir;
+    ctrl->init(ctrl);
+    ctrl->turnOn(ctrl);
+    psw->swDown();
+    ctrl->turnOff(ctrl);
+    psw->swUp();
+
+    init(&cir);
+	cal_area(&cir);
+
+    getchar();
+    return;
+}
+

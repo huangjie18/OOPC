@@ -1,0 +1,19 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+C:\Keil_C_Code(Chap29-33)\Chap_33\BLINKY-02-state\BLINKY.uv2
+Project File Date:  05/19/2008
+
+<h2>Output:</h2>
+Build target 'Simulator'
+"BLINKY" - 0 Error(s), 0 Warning(s).
+Build target 'Simulator'
+compiling EX33-handler.c...
+linking...
+Program Size: data=22.0 xdata=1032 code=1283
+"BLINKY" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>

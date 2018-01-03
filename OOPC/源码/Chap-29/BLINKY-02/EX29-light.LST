@@ -1,0 +1,105 @@
+C51 COMPILER V8.01   EX29_LIGHT                                                            05/19/2008 01:54:04 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX29_LIGHT
+OBJECT MODULE PLACED IN EX29-light.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX29-light.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX29-light.c */
+   2          #include <REG51F.H>
+   3          #define LW_OOPC_STATIC
+   4          #include "ex29-light.h"
+   5          
+   6          sbit RED_pin = P0^0;
+   7          sbit YELLOW_pin = P0^1;
+   8          sbit GREEN_pin = P0^2;
+   9          
+  10          void g_timer_delay() {
+  11   1         TMOD &= 0xF0;
+  12   1         TMOD |= 0x01;
+  13   1         ET0 = 0;
+  14   1         TH0 = 0x3C;
+  15   1         TL0 = 0xB0;
+  16   1         TF0 = 0;
+  17   1         TR0 = 1;
+  18   1         while(TF0 == 0);
+  19   1         TR0 = 0;
+  20   1      }
+  21          
+  22          void g_delay(unsigned int sec) {
+  23   1         int i, j;
+  24   1         for(i=0; i<sec; i++)
+  25   1            for(j=0; j<20; j++)
+  26   1               g_timer_delay();
+  27   1      }
+  28                                                  
+  29          static void init(TLight* t) {
+  30   1          P0 = 0x00;
+  31   1          t->state = 'R'; 
+  32   1              t->wait_R = 10;
+  33   1              t->wait_Y = 2;
+  34   1              t->wait_G = 10;
+  35   1         }
+  36          
+  37          static void run(TLight* t) {
+  38   1            switch(t->state) {
+  39   2                case 'R':
+  40   2                     t->state = 'G';
+  41   2                         t->perform(t);
+  42   2                         break;
+  43   2                case 'G':
+  44   2                     t->state = 'Y';
+  45   2                         t->perform(t);
+  46   2                         break;
+  47   2                case 'Y':
+  48   2                 t->state = 'R';
+  49   2                         t->perform(t);
+  50   2                         break;
+  51   2              }
+  52   1      }
+  53          static void perform(TLight *t) {
+  54   1               switch(t->state) {
+  55   2                case 'R':
+C51 COMPILER V8.01   EX29_LIGHT                                                            05/19/2008 01:54:04 PAGE 2   
+
+  56   2                     RED_pin = 1;
+  57   2                     YELLOW_pin = 0;
+  58   2                     GREEN_pin = 0;
+  59   2                         g_delay(t->wait_R);
+  60   2                         break;
+  61   2                case 'Y':
+  62   2                 RED_pin = 0;
+  63   2                     YELLOW_pin = 1;
+  64   2                     GREEN_pin = 0;
+  65   2                         g_delay(t->wait_Y);
+  66   2                         break;
+  67   2                case 'G':
+  68   2                     RED_pin = 0;
+  69   2                     YELLOW_pin = 0;
+  70   2                     GREEN_pin = 1;
+  71   2                         g_delay(t->wait_G);
+  72   2                         break;
+  73   2            }
+  74   1              }       
+  75                  
+  76          CTOR(TLight)
+  77   1        FUNCTION_SETTING(init, init)
+  78   1        FUNCTION_SETTING(run, run)
+  79   1        FUNCTION_SETTING(perform, perform)
+  80   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    334    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

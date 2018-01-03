@@ -1,0 +1,54 @@
+C51 COMPILER V8.01   EX31_IP                                                               05/19/2008 04:23:27 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX31_IP
+OBJECT MODULE PLACED IN EX31-ip.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX31-ip.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*  EX15-led.c   */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex15-led.h"
+*** WARNING C318 IN LINE 4 OF EX31-ip.c: can't open file 'ex15-led.h'
+   5          
+   6          void g_delay(unsigned int ms) {
+   7   1         int i, j;
+   8   1         for(i=0; i<ms; i++)
+   9   1            for(j=0; j<120; j++);
+  10   1      }
+  11          
+  12          static unsigned char SEGTAB[] = {0xC0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x83, 0xf8, 0x80, 0x98}; 
+  13          static unsigned char SCANLINE[] = {0xf7, 0xfb, 0xfd, 0xfe}; 
+  14          
+  15          static void show_data(LED *t) {
+*** ERROR C141 IN LINE 15 OF EX31-IP.C: syntax error near '*', expected ')'
+  16   1          unsigned char ch, sc;
+  17   1              int i;
+  18   1              P0 = 0xf0;
+  19   1          for(i=0; i<4; i++)
+  20   1                 {
+  21   2                  ch = SEGTAB[t->digits[i]];
+*** ERROR C202 IN LINE 21 OF EX31-IP.C: 't': undefined identifier
+  22   2                      sc = SCANLINE[i];
+  23   2                      t->scan_port(0xff);
+*** ERROR C202 IN LINE 23 OF EX31-IP.C: 't': undefined identifier
+  24   2                      t->data_port(ch);
+*** ERROR C202 IN LINE 24 OF EX31-IP.C: 't': undefined identifier
+  25   2                      t->scan_port(sc);
+*** ERROR C202 IN LINE 25 OF EX31-IP.C: 't': undefined identifier
+  26   2                      g_delay(20000);
+  27   2                 }
+  28   1      }
+  29          
+  30          CTOR(LED)
+*** ERROR C141 IN LINE 30 OF EX31-IP.C: syntax error near '*', expected ')'
+*** ERROR C230 IN LINE 30 OF EX31-IP.C: 'LED': unknown struct/union/enum tag
+*** ERROR C141 IN LINE 30 OF EX31-IP.C: syntax error near '*', expected ')'
+  31   1              FUNCTION_SETTING(show_data, show_data)
+*** ERROR C202 IN LINE 31 OF EX31-IP.C: 't': undefined identifier
+  32   1      END_CTOR
+*** ERROR C202 IN LINE 32 OF EX31-IP.C: 't': undefined identifier
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  10 ERROR(S)

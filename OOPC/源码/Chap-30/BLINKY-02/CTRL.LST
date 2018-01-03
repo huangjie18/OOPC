@@ -1,0 +1,165 @@
+C51 COMPILER V8.01   CTRL                                                                  05/19/2008 02:26:18 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE CTRL
+OBJECT MODULE PLACED IN CTRL.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE CTRL.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX30-ctrl.c  */
+   2          #include <REG51F.H>
+   3          #include <stdio.h>
+   4          
+   5          #define LW_OOPC_STATIC
+   6          #include "ex30-ctrl.h"
+*** WARNING C318 IN LINE 2 OF ex30-ctrl.h: can't open file 'ex12-light-r.h'
+*** WARNING C318 IN LINE 3 OF ex30-ctrl.h: can't open file 'ex12-light-l.h'
+*** ERROR C202 IN LINE 8 OF EX30-CTRL.H: 'LightR': undefined identifier
+*** ERROR C141 IN LINE 8 OF EX30-CTRL.H: syntax error near 'lg_right'
+*** ERROR C202 IN LINE 9 OF EX30-CTRL.H: 'LightL': undefined identifier
+*** ERROR C141 IN LINE 9 OF EX30-CTRL.H: syntax error near 'lg_left'
+*** ERROR C141 IN LINE 10 OF EX30-CTRL.H: syntax error near 'void'
+*** ERROR C202 IN LINE 10 OF EX30-CTRL.H: 'init': undefined identifier
+*** ERROR C141 IN LINE 10 OF EX30-CTRL.H: syntax error near ')'
+*** ERROR C141 IN LINE 11 OF EX30-CTRL.H: syntax error near 'void'
+*** ERROR C202 IN LINE 11 OF EX30-CTRL.H: 'run': undefined identifier
+*** ERROR C141 IN LINE 11 OF EX30-CTRL.H: syntax error near ')'
+*** ERROR C141 IN LINE 12 OF EX30-CTRL.H: syntax error near 'void'
+*** ERROR C202 IN LINE 12 OF EX30-CTRL.H: 'goto_LW': undefined identifier
+*** ERROR C141 IN LINE 12 OF EX30-CTRL.H: syntax error near ')'
+*** ERROR C141 IN LINE 13 OF EX30-CTRL.H: syntax error near 'void'
+*** ERROR C202 IN LINE 13 OF EX30-CTRL.H: 'goto_SW': undefined identifier
+*** ERROR C141 IN LINE 13 OF EX30-CTRL.H: syntax error near ')'
+*** ERROR C141 IN LINE 14 OF EX30-CTRL.H: syntax error near ';'
+   7          
+   8          extern LightRSetting(LightR*);
+*** ERROR C141 IN LINE 8 OF CTRL.C: syntax error near '*', expected ')'
+   9          extern LightLSetting(LightL*);
+*** ERROR C141 IN LINE 9 OF CTRL.C: syntax error near '*', expected ')'
+  10          
+  11          void g_timer_delay() {
+  12   1         TMOD &= 0xF0;
+  13   1         TMOD |= 0x01;
+  14   1         ET0 = 0;
+  15   1         TH0 = 0x3C;
+  16   1         TL0 = 0xB0;
+  17   1         TF0 = 0;
+  18   1         TR0 = 1;
+  19   1         while(TF0 == 0);
+  20   1         TR0 = 0;
+  21   1      }
+  22          
+  23          void g_delay(unsigned int sec) {
+  24   1         int i, j;
+  25   1         for(i=0; i<sec; i++)
+  26   1            for(j=0; j<20; j++)
+  27   1               g_timer_delay();
+  28   1      }
+  29                                                  
+  30          static void init(CTRL* t) {
+*** ERROR C141 IN LINE 30 OF CTRL.C: syntax error near '*', expected ')'
+  31   1          LightR *pr; LightL *pl;
+*** ERROR C202 IN LINE 31 OF CTRL.C: 'LightR': undefined identifier
+*** ERROR C202 IN LINE 31 OF CTRL.C: 'LightL': undefined identifier
+C51 COMPILER V8.01   CTRL                                                                  05/19/2008 02:26:18 PAGE 2   
+
+  32   1              pr = &(t->lg_right);
+*** ERROR C202 IN LINE 32 OF CTRL.C: 'pr': undefined identifier
+  33   1              pl = &(t->lg_left);
+*** ERROR C202 IN LINE 33 OF CTRL.C: 'pl': undefined identifier
+  34   1      
+  35   1              LightRSetting(pr);   
+*** ERROR C202 IN LINE 35 OF CTRL.C: 'pr': undefined identifier
+  36   1              LightLSetting(pl);
+*** ERROR C202 IN LINE 36 OF CTRL.C: 'pl': undefined identifier
+  37   1         
+  38   1          t->state = 'L'; 
+*** ERROR C202 IN LINE 38 OF CTRL.C: 't': undefined identifier
+  39   1              pr->init('Y', pr);
+*** ERROR C202 IN LINE 39 OF CTRL.C: 'pr': undefined identifier
+  40   1              pl->init('R', pl); 
+*** ERROR C202 IN LINE 40 OF CTRL.C: 'pl': undefined identifier
+  41   1              }
+  42          
+  43          static void run(CTRL* t) {
+*** ERROR C141 IN LINE 43 OF CTRL.C: syntax error near '*', expected ')'
+  44   1           while(1) {
+  45   2            switch(t->state) {
+*** ERROR C202 IN LINE 45 OF CTRL.C: 't': undefined identifier
+  46   3                case 'L':
+  47   3                     t->goto_SW(t);
+*** ERROR C202 IN LINE 47 OF CTRL.C: 't': undefined identifier
+  48   3                         break;
+  49   3                case 'S':
+  50   3                     t->goto_LW(t);
+*** ERROR C202 IN LINE 50 OF CTRL.C: 't': undefined identifier
+  51   3                         break;
+  52   3           }
+  53   2         }
+  54   1      }
+  55          
+  56          static void goto_LW(CTRL *t) {
+*** ERROR C141 IN LINE 56 OF CTRL.C: syntax error near '*', expected ')'
+  57   1                 LightR *pr; LightL *pl;
+*** ERROR C202 IN LINE 57 OF CTRL.C: 'LightR': undefined identifier
+*** ERROR C202 IN LINE 57 OF CTRL.C: 'LightL': undefined identifier
+  58   1                 t->state = 'L';
+*** ERROR C202 IN LINE 58 OF CTRL.C: 't': undefined identifier
+  59   1                 pr = &(t->lg_right);
+*** ERROR C202 IN LINE 59 OF CTRL.C: 'pr': undefined identifier
+  60   1                 pl = &(t->lg_left);
+*** ERROR C202 IN LINE 60 OF CTRL.C: 'pl': undefined identifier
+  61   1      
+  62   1               
+  63   1              
+  64   1                g_delay(3);
+  65   1                pr->ev_Y(pr);
+*** ERROR C202 IN LINE 65 OF CTRL.C: 'pr': undefined identifier
+  66   1                pl->ev_Y(pl);
+*** ERROR C202 IN LINE 66 OF CTRL.C: 'pl': undefined identifier
+  67   1          } 
+  68          static void goto_SW(CTRL *t) {
+*** ERROR C141 IN LINE 68 OF CTRL.C: syntax error near '*', expected ')'
+  69   1          LightR *pr; LightL *pl;
+*** ERROR C202 IN LINE 69 OF CTRL.C: 'LightR': undefined identifier
+*** ERROR C202 IN LINE 69 OF CTRL.C: 'LightL': undefined identifier
+  70   1              t->state = 'S';
+*** ERROR C202 IN LINE 70 OF CTRL.C: 't': undefined identifier
+C51 COMPILER V8.01   CTRL                                                                  05/19/2008 02:26:18 PAGE 3   
+
+  71   1              pr = &(t->lg_right);
+*** ERROR C202 IN LINE 71 OF CTRL.C: 'pr': undefined identifier
+  72   1          pl = &(t->lg_left);
+*** ERROR C202 IN LINE 72 OF CTRL.C: 'pl': undefined identifier
+  73   1               
+  74   1              g_delay(1);
+  75   1              pr->ev_RG(pr);
+*** ERROR C202 IN LINE 75 OF CTRL.C: 'pr': undefined identifier
+  76   1              pl->ev_RG(pl);
+*** ERROR C202 IN LINE 76 OF CTRL.C: 'pl': undefined identifier
+  77   1          } 
+  78                  
+  79          CTOR(CTRL)
+  80            FUNCTION_SETTING(init, init)
+*** ERROR C131 IN LINE 80 OF CTRL.C: 'init': duplicate function-parameter
+  81            FUNCTION_SETTING(run, run)
+*** ERROR C132 IN LINE 81 OF CTRL.C: '_FUNCTION_SETTING': not in formal parameter list
+*** ERROR C141 IN LINE 81 OF CTRL.C: syntax error near 'FUNCTION_SETTING'
+*** ERROR C131 IN LINE 81 OF CTRL.C: 'run': duplicate function-parameter
+  82            FUNCTION_SETTING(goto_LW, goto_LW)
+*** ERROR C132 IN LINE 82 OF CTRL.C: '_FUNCTION_SETTING': not in formal parameter list
+*** ERROR C141 IN LINE 82 OF CTRL.C: syntax error near 'FUNCTION_SETTING'
+*** ERROR C131 IN LINE 82 OF CTRL.C: 'goto_LW': duplicate function-parameter
+  83            FUNCTION_SETTING(goto_SW, goto_SW)
+*** ERROR C132 IN LINE 83 OF CTRL.C: '_FUNCTION_SETTING': not in formal parameter list
+*** ERROR C141 IN LINE 83 OF CTRL.C: syntax error near 'FUNCTION_SETTING'
+*** ERROR C131 IN LINE 83 OF CTRL.C: 'goto_SW': duplicate function-parameter
+  84          END_CTOR
+*** ERROR C132 IN LINE 84 OF CTRL.C: '_FUNCTION_SETTING': not in formal parameter list
+*** ERROR C141 IN LINE 84 OF CTRL.C: syntax error near 'END_CTOR'
+  85          
+  86                                             
+*** ERROR C132 IN LINE 86 OF CTRL.C: 'END_CTOR': not in formal parameter list
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  62 ERROR(S)

@@ -23,5 +23,6 @@ void* type2##New() \
 #define END_CTOR return (void*)t; };
 #define FUNCTION_SETTING(f1,f2)  t->f1 = f2;
 #define IMPLEMENTS(type) struct type type
-#define INTERFACE(type) struct type
+#define INTERFACE(type) typedef struct type type; \
+struct type
 #endif

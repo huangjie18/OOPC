@@ -1,0 +1,44 @@
+C51 COMPILER V8.01   EX32_LED                                                              05/19/2008 11:25:58 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_LED
+OBJECT MODULE PLACED IN EX32-LED.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-LED.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-led.c */
+   2          #include <REG51F.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex32-led.h"
+   5          
+   6          static void send(unsigned char hx) {
+   7   1              P0 = hx;
+   8   1      }
+   9          
+  10          CTOR(LED_P0)
+  11   1        FUNCTION_SETTING(IL.send, send)
+  12   1      END_CTOR
+  13          
+  14          //----------------------------------------
+  15          static void send2(unsigned char hx) {
+  16   1              P1 = hx;
+  17   1      }
+  18          
+  19          CTOR(LED_P1)
+  20   1        FUNCTION_SETTING(IL.send, send2)
+  21   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    108    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

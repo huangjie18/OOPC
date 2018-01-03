@@ -1,0 +1,62 @@
+/* cx19-ap2.c  */
+#include "stdio.h"
+#include "lw_oopc.h"
+
+CLASS(Author) 
+   { 
+     void (*set)(void*, char*, char*); 
+     char name[14];
+     char telphone[20]; 
+   };
+
+static void set(void* t; char na[], char tel[] ) 
+      { 
+        Author* cthis = (Author*)t;
+        strcpy(cthis->name, na);
+        strcpy(cthis->telphone, tel); 
+      } 
+static char* get_name(void* t) 
+      { 
+        Author* cthis = (Author*)t;
+        return cthis->name;
+      } 
+static char* get_tel_no(void* t) 
+      { 
+        Author* cthis = (Author*)t;
+        return cthis->telphone; 
+      } 
+CTOR(Author)
+   FUNCTION_SETTING(set, set)
+   FUNCTION_SETTING(get_name, get_name)
+   FUNCTION_SETTING(get_tel_no, get_tel_no)
+END_CTOR
+
+/*  ----------------------------  */
+CLASS(Book)
+   {
+     void (*set)(void*, char*, char*, char*);
+     char book_no[14];
+     char title[20];
+     Author* author; 
+};
+
+static void set(void* t, char no[], char ti[], char a[], char tel[] )
+      {
+        Book* cthis = (Book*)t;
+        strcpy(cthis->book_no, no);
+	strcpy(cthis->title, ti);
+        author = (Author*)AuthorNew();
+        author->set(author, a, tel);
+      }
+CTOR(Book)
+  FUNCTION_SETTING(set, set)
+END_CTOR
+
+int main()
+{
+    Book *book = (Book*)BookNew();
+    book->set(book, "0-201-54709-0", "OOPC", "Alvin Kao");
+    printf("course title = %s\n", book->title);
+    getchar();
+    return 0;
+}

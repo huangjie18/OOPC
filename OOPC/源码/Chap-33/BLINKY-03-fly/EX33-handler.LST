@@ -1,0 +1,106 @@
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 10:25:21 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX33_HANDLER
+OBJECT MODULE PLACED IN EX33-handler.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX33-handler.c DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX33-handler.c  */
+   2          #include <REG52.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex33-ifs.h"
+   5          #include "ex33-handler.h"
+   6          
+   7          extern void* LandingNew();
+   8          extern void* FlyingNew();
+   9          extern void* PreparingNew();
+  10          extern void* TakingOffNew();
+  11          
+  12          void g_delay(unsigned int ms) {
+  13   1         int i, j;
+  14   1         for(i=0; i<ms; i++)
+  15   1            for(j=0; j<120; j++);
+  16   1      }
+  17          
+  18          static void init(Handler *t){
+  19   1          IFlyState *fs;
+  20   1              fs = PreparingNew();
+  21   1              fs->init(fs);
+  22   1              t->array[0] = fs;
+  23   1      
+  24   1              fs = TakingOffNew();
+  25   1              fs->init(fs);
+  26   1              t->array[1] = fs;
+  27   1      
+  28   1              fs = FlyingNew();
+  29   1              fs->init(fs);
+  30   1              t->array[2] = fs;
+  31   1      
+  32   1              fs = LandingNew();
+  33   1              fs->init(fs);
+  34   1              t->array[3] = fs;
+  35   1      
+  36   1              t->state = 'I';
+  37   1      }
+  38          
+  39          static void goto_P(Handler *t){
+  40   1         t->state = 'P';
+  41   1         t->array[0]->handle(t->array[0]);
+  42   1      }
+  43          static void goto_T(Handler *t){
+  44   1         t->state = 'T';
+  45   1         t->array[1]->handle(t->array[1]);
+  46   1      }
+  47          static void goto_F(Handler *t){
+  48   1         t->state = 'F';
+  49   1         t->array[2]->handle(t->array[2]);
+  50   1      }
+  51          static void goto_L(Handler *t){
+  52   1         t->state = 'L';
+  53   1         t->array[3]->handle(t->array[3]);
+  54   1      }
+  55          
+C51 COMPILER V8.01   EX33_HANDLER                                                          05/19/2008 10:25:21 PAGE 2   
+
+  56          static void run(Handler *t) {
+  57   1              switch(t->state) {
+  58   2                 case 'I':
+  59   2                    goto_P(t);
+  60   2                        break;
+  61   2                 case 'P':
+  62   2                    goto_T(t);
+  63   2                        break;
+  64   2                 case 'T':  
+  65   2                        goto_F(t);
+  66   2                        break;
+  67   2                 case 'F':
+  68   2                        goto_L(t);
+  69   2                        break;
+  70   2                 case 'L':
+  71   2                        goto_P(t);
+  72   2                        break;
+  73   2                }
+  74   1                g_delay(20000);
+  75   1        }
+  76          
+  77          CTOR(Handler)
+  78   1              FUNCTION_SETTING(init, init)
+  79   1              FUNCTION_SETTING(run, run)
+  80   1      END_CTOR
+  81           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    658    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      24
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

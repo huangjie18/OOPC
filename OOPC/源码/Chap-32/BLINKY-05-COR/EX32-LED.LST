@@ -1,0 +1,98 @@
+C51 COMPILER V8.01   EX32_LED                                                              05/19/2008 11:29:47 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE EX32_LED
+OBJECT MODULE PLACED IN EX32-LED.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE EX32-LED.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-led.c */
+   2          #include <REG51F.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex32-led.h"
+   5          
+   6          static void init_1(LED_P1* t) {
+   7   1              t->next = NULL;
+   8   1      //      xxx = 0xf3;
+   9   1      }
+  10          
+  11          static int pass_1(char ty, char hx, void *t) {
+  12   1          LED_P1 *cthis = (LED_P1*)t;
+  13   1              IL* ps = cthis->next;
+  14   1          if(ty=='1')
+  15   1                   {
+  16   2                         P1 = hx;
+  17   2                         return 1;
+  18   2                       }
+  19   1              if(ty=='A') P1 = hx;
+  20   1          if(ps == NULL) return 0;
+  21   1              else  return ps->pass(ty, hx, ps);
+  22   1      }
+  23          
+  24          
+  25          CTOR(LED_P1)
+  26   1        FUNCTION_SETTING(init, init_1)
+  27   1        FUNCTION_SETTING(IL.pass, pass_1)
+  28   1      END_CTOR
+  29          // ------------------------------- 
+  30           static void init_0(LED_P0* t) {
+  31   1              t->next = NULL;
+  32   1      }
+  33          
+  34          static int pass_0(char ty, char hx, void *t) {
+  35   1          LED_P0 *cthis = (LED_P0*)t;
+  36   1              IL* ps = cthis->next;
+  37   1          if(ty=='0')
+  38   1                   {
+  39   2                         P0 = hx;
+  40   2                         return 1;
+  41   2                       }
+  42   1              if(ty=='A') P0 = hx;
+  43   1          if(ps == NULL) return 0;
+  44   1              else  return ps->pass(ty, hx, ps);
+  45   1      }
+  46          
+  47          CTOR(LED_P0)
+  48   1        FUNCTION_SETTING(init, init_0)
+  49   1        FUNCTION_SETTING(IL.pass, pass_0)
+  50   1      END_CTOR
+  51          //----------------------------------------
+  52          static void init_2(LED_P2* t) {
+  53   1              t->next = NULL;
+  54   1      }
+  55          
+C51 COMPILER V8.01   EX32_LED                                                              05/19/2008 11:29:47 PAGE 2   
+
+  56          static int pass_2(char ty, char hx, void *t) {
+  57   1          LED_P2 *cthis = (LED_P2*)t;
+  58   1              IL* ps = cthis->next;
+  59   1          if(ty=='2')
+  60   1                   {
+  61   2                         P2 = hx;
+  62   2                         return 1;
+  63   2                       }
+  64   1              if(ty=='A') P2 = hx;
+  65   1          if(ps == NULL) return 0;
+  66   1              else  return ps->pass(ty, hx, ps);
+  67   1      }
+  68          
+  69          
+  70          CTOR(LED_P2)
+  71   1        FUNCTION_SETTING(init, init_2)
+  72   1        FUNCTION_SETTING(IL.pass, pass_2)
+  73   1      END_CTOR
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    519    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      27
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

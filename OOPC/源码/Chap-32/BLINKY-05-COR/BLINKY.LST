@@ -1,0 +1,78 @@
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:29:07 PAGE 1   
+
+
+C51 COMPILER V8.01, COMPILATION OF MODULE BLINKY
+OBJECT MODULE PLACED IN BLINKY.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE BLINKY.C DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /* EX32-ap-5.c (BLINKY.c) */
+   2          #include <REG51F.H>
+   3          #include "lw_oopc_kc.h"
+   4          #include "ex32-il.h"
+   5          #include "ex32-factory.h"
+   6          
+   7          void g_timer_delay() {
+   8   1         TMOD &= 0xF0;     TMOD |= 0x01;
+   9   1         ET0 = 0;
+  10   1         TH0 = 0x3C;       TL0 = 0xB0;
+  11   1         TF0 = 0;                  TR0 = 1;
+  12   1         while(TF0 == 0);
+  13   1         TR0 = 0;
+  14   1      }
+  15          
+  16          void g_delay(unsigned int sec) {
+  17   1         int i, j;
+  18   1         for(i=0; i<sec; i++)
+  19   1            for(j=0; j<20; j++)
+  20   1               g_timer_delay();
+  21   1      }
+  22          
+  23          extern void* FactoryNew();
+  24          
+  25          char xdata MemPool[1024];
+  26          
+  27          void main (void){
+  28   1         IL *leds; Factory *fa;
+  29   1         init_mempool(MemPool,sizeof(MemPool));
+  30   1         fa = FactoryNew();
+  31   1         fa->init(fa);
+  32   1         //
+  33   1         leds = fa->get_LED_LIST(fa); 
+  34   1        
+  35   1         leds->pass('0', 0x77, leds);
+  36   1            g_delay(2);
+  37   1         leds->pass('1', 0x33, leds);
+  38   1            g_delay(2);
+  39   1         leds->pass('3', 0xaa, leds);
+  40   1                g_delay(2);
+  41   1         leds->pass('2', 0xaa, leds);
+  42   1                g_delay(2);
+  43   1         P0 = 0x00;
+  44   1         P1 = 0x00;
+  45   1         P2 = 0x00;
+  46   1          g_delay(2);
+  47   1         leds->pass('A', 0xf0, leds);
+  48   1      
+  49   1      
+  50   1         while(1) {
+  51   2                  ;
+  52   2               }
+  53   1      }
+
+
+C51 COMPILER V8.01   BLINKY                                                                05/19/2008 11:29:07 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    309    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   1024    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
